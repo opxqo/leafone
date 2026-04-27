@@ -1,0 +1,64 @@
+﻿.page-head {
+  margin-top: 6rpx;
+}
+
+.page-title {
+  display: block;
+  font-size: 58rpx;
+  color: #1f3b2d;
+  font-weight: 700;
+}
+
+.page-subtitle {
+  display: block;
+  margin-top: 8rpx;
+  color: #6f8678;
+  font-size: 24rpx;
+}
+
+.discover-list {
+  margin-top: 14rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 10rpx;
+}
+
+.discover-item {
+  display: flex;
+  align-items: center;
+  gap: 14rpx;
+}
+
+.discover-icon {
+  width: 66rpx;
+  height: 66rpx;
+  border-radius: 22rpx;
+  background: linear-gradient(150deg, #d8ecdf 0%, #b3d6c0 100%);
+}
+
+.discover-main {
+  flex: 1;
+}
+
+.discover-title {
+  display: block;
+  color: #264032;
+  font-size: 30rpx;
+  font-weight: 600;
+}
+
+.discover-desc {
+  display: block;
+  margin-top: 6rpx;
+  color: #73877b;
+  font-size: 22rpx;
+}
+
+.discover-count {
+  color: #7d9286;
+  font-size: 22rpx;
+}
+
+.banner-card.compact {
+  margin-top: 14rpx;
+}

@@ -1,0 +1,224 @@
+﻿.article-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10rpx;
+}
+
+.round-btn {
+  width: 56rpx;
+  height: 56rpx;
+  border-radius: 20rpx;
+  border: 1rpx solid #d4e4da;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #4f695a;
+  font-size: 28rpx;
+}
+
+.article-main {
+  display: flex;
+  flex-direction: column;
+  gap: 10rpx;
+}
+
+.author-row {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+}
+
+.avatar {
+  width: 64rpx;
+  height: 64rpx;
+  border-radius: 999rpx;
+  background: linear-gradient(145deg, #cbddd1, #aac8b5);
+}
+
+.avatar.small {
+  width: 52rpx;
+  height: 52rpx;
+}
+
+.author-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4rpx;
+}
+
+.author-name {
+  color: #293f33;
+  font-size: 29rpx;
+  font-weight: 600;
+}
+
+.author-meta {
+  color: #72887c;
+  font-size: 21rpx;
+}
+
+.follow-btn {
+  border: 1rpx solid #9dcdb1;
+  color: #2b8d50;
+  background: #f0fbf4;
+  border-radius: 999rpx;
+  padding: 8rpx 16rpx;
+  font-size: 22rpx;
+}
+
+.article-title {
+  margin-top: 6rpx;
+  color: #22392d;
+  font-size: 44rpx;
+  line-height: 1.28;
+  font-weight: 700;
+}
+
+.article-intro {
+  color: #42584c;
+  font-size: 25rpx;
+  line-height: 1.8;
+}
+
+.bullet-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6rpx;
+}
+
+.bullet-item {
+  color: #445d4f;
+  font-size: 25rpx;
+}
+
+.article-link {
+  color: #2f8d53;
+  font-size: 24rpx;
+}
+
+.file-list {
+  margin-top: 4rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 10rpx;
+}
+
+.file-item {
+  display: flex;
+  align-items: center;
+  gap: 10rpx;
+  border-radius: 20rpx;
+  background: #f7fbf8;
+  padding: 12rpx;
+}
+
+.file-icon {
+  width: 58rpx;
+  height: 58rpx;
+  border-radius: 14rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 20rpx;
+  font-weight: 700;
+}
+
+.file-icon.pdf {
+  background: #e3554e;
+}
+
+.file-icon.doc {
+  background: #3f7de2;
+}
+
+.file-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4rpx;
+}
+
+.file-name {
+  color: #2f4a3c;
+  font-size: 25rpx;
+}
+
+.file-size {
+  color: #7c9286;
+  font-size: 21rpx;
+}
+
+.download-btn {
+  border-radius: 999rpx;
+  background: #ebf8ef;
+  color: #2f8d53;
+  padding: 8rpx 16rpx;
+  font-size: 22rpx;
+}
+
+.comment-card {
+  margin-top: 12rpx;
+}
+
+.comment-item {
+  margin-top: 10rpx;
+  display: flex;
+  gap: 10rpx;
+}
+
+.comment-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4rpx;
+}
+
+.comment-author {
+  color: #324d3f;
+  font-size: 24rpx;
+  font-weight: 600;
+}
+
+.comment-content {
+  color: #496255;
+  font-size: 24rpx;
+  line-height: 1.6;
+}
+
+.comment-time {
+  color: #82988c;
+  font-size: 20rpx;
+}
+
+.comment-input-wrap {
+  margin-top: 12rpx;
+  display: flex;
+  gap: 10rpx;
+  align-items: center;
+}
+
+.comment-input {
+  flex: 1;
+  border: 1rpx solid #d8e7dd;
+  border-radius: 999rpx;
+  height: 64rpx;
+  background: #fff;
+  color: #9eb1a4;
+  padding: 0 20rpx;
+}
+
+.send-btn {
+  border-radius: 999rpx;
+  background: #2c8f52;
+  color: #fff;
+  height: 64rpx;
+  padding: 0 24rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24rpx;
+}

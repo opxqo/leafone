@@ -1,0 +1,878 @@
+{
+  "version": "2.11",
+  "children": [
+    {
+      "type": "frame",
+      "id": "home_screen_bg",
+      "name": "武汉城市学院论坛-首页-源设计稿",
+      "x": 0,
+      "y": 0,
+      "width": 393,
+      "height": 852,
+      "fill": { "type": "color", "color": "#F7F9F6" },
+      "cornerRadius": 34,
+      "clip": true,
+      "layout": "none"
+    },
+    {
+      "type": "rectangle",
+      "id": "hero_background",
+      "name": "校园湖景头图",
+      "x": 0,
+      "y": 0,
+      "width": 393,
+      "height": 300,
+      "cornerRadius": [34, 34, 0, 0],
+      "fill": {
+        "type": "gradient",
+        "gradientType": "linear",
+        "rotation": 180,
+        "colors": [
+          { "color": "#BFE0F4", "position": 0 },
+          { "color": "#EAF5F0", "position": 0.48 },
+          { "color": "#73AD77", "position": 1 }
+        ]
+      }
+    },
+    {
+      "type": "ellipse",
+      "id": "lake_surface",
+      "name": "东湖水面",
+      "x": 16,
+      "y": 169,
+      "width": 370,
+      "height": 86,
+      "fill": { "type": "color", "color": "#A8D2CB" },
+      "opacity": 0.72
+    },
+    {
+      "type": "ellipse",
+      "id": "tree_line",
+      "name": "湖岸绿植",
+      "x": 6,
+      "y": 131,
+      "width": 390,
+      "height": 70,
+      "fill": { "type": "color", "color": "#57A76B" },
+      "opacity": 0.7
+    },
+    {
+      "type": "rectangle",
+      "id": "campus_building",
+      "name": "校园建筑剪影",
+      "x": 266,
+      "y": 99,
+      "width": 95,
+      "height": 62,
+      "cornerRadius": 6,
+      "fill": { "type": "color", "color": "#FFFFFF" },
+      "opacity": 0.72
+    },
+    {
+      "type": "text",
+      "id": "status_time",
+      "content": "9:41",
+      "x": 32,
+      "y": 21,
+      "fontFamily": "Inter",
+      "fontSize": 17,
+      "fontWeight": "700",
+      "fill": { "type": "color", "color": "#0B1711" }
+    },
+    {
+      "type": "icon_font",
+      "id": "status_signal",
+      "iconFontFamily": "lucide",
+      "iconFontName": "signal",
+      "x": 314,
+      "y": 24,
+      "width": 17,
+      "height": 17,
+      "fill": { "type": "color", "color": "#0B1711" }
+    },
+    {
+      "type": "icon_font",
+      "id": "status_wifi",
+      "iconFontFamily": "lucide",
+      "iconFontName": "wifi",
+      "x": 339,
+      "y": 24,
+      "width": 17,
+      "height": 17,
+      "fill": { "type": "color", "color": "#0B1711" }
+    },
+    {
+      "type": "icon_font",
+      "id": "status_battery",
+      "iconFontFamily": "lucide",
+      "iconFontName": "battery",
+      "x": 364,
+      "y": 24,
+      "width": 20,
+      "height": 17,
+      "fill": { "type": "color", "color": "#0B1711" }
+    },
+    {
+      "type": "ellipse",
+      "id": "top_search_button",
+      "name": "顶部搜索按钮",
+      "x": 342,
+      "y": 62,
+      "width": 44,
+      "height": 44,
+      "fill": { "type": "color", "color": "#FFFFFF" },
+      "effect": { "type": "shadow", "shadowType": "outer", "offset": { "x": 0, "y": 8 }, "blur": 24, "color": "#12422A22" }
+    },
+    {
+      "type": "icon_font",
+      "id": "top_search_icon",
+      "iconFontFamily": "lucide",
+      "iconFontName": "search",
+      "x": 353,
+      "y": 73,
+      "width": 22,
+      "height": 22,
+      "fill": { "type": "color", "color": "#164C32" }
+    },
+    {
+      "type": "text",
+      "id": "welcome_text",
+      "content": "你好，欢迎来到",
+      "x": 24,
+      "y": 122,
+      "fontFamily": "Inter",
+      "fontSize": 17,
+      "fontWeight": "500",
+      "fill": { "type": "color", "color": "#6F927B" }
+    },
+    {
+      "type": "text",
+      "id": "home_title",
+      "content": "武汉城市学院论坛",
+      "x": 24,
+      "y": 154,
+      "fontFamily": "Inter",
+      "fontSize": 27,
+      "fontWeight": "800",
+      "fill": { "type": "color", "color": "#164C32" }
+    },
+    {
+      "type": "text",
+      "id": "home_subtitle",
+      "content": "WUHAN CITY COLLEGE",
+      "x": 24,
+      "y": 195,
+      "fontFamily": "Inter",
+      "fontSize": 13,
+      "fontWeight": "700",
+      "fill": { "type": "color", "color": "#6B9878" }
+    },
+    {
+      "type": "rectangle",
+      "id": "search_bar",
+      "name": "搜索框",
+      "x": 18,
+      "y": 237,
+      "width": 357,
+      "height": 48,
+      "cornerRadius": 24,
+      "fill": { "type": "color", "color": "#DCEBE3CC" },
+      "effect": { "type": "shadow", "shadowType": "outer", "offset": { "x": 0, "y": 12 }, "blur": 30, "color": "#1B4B3226" }
+    },
+    {
+      "type": "icon_font",
+      "id": "search_bar_icon",
+      "iconFontFamily": "lucide",
+      "iconFontName": "search",
+      "x": 34,
+      "y": 250,
+      "width": 22,
+      "height": 22,
+      "fill": { "type": "color", "color": "#FFFFFF" }
+    },
+    {
+      "type": "text",
+      "id": "search_bar_placeholder",
+      "content": "搜索帖子、话题、用户...",
+      "x": 66,
+      "y": 251,
+      "fontFamily": "Inter",
+      "fontSize": 14,
+      "fontWeight": "600",
+      "fill": { "type": "color", "color": "#FFFFFF" }
+    },
+    {
+      "type": "icon_font",
+      "id": "scan_icon",
+      "iconFontFamily": "lucide",
+      "iconFontName": "scan-line",
+      "x": 337,
+      "y": 250,
+      "width": 22,
+      "height": 22,
+      "fill": { "type": "color", "color": "#FFFFFF" }
+    },
+    {
+      "type": "rectangle",
+      "id": "category_card",
+      "name": "功能入口白卡",
+      "x": 18,
+      "y": 292,
+      "width": 357,
+      "height": 162,
+      "cornerRadius": 18,
+      "fill": { "type": "color", "color": "#FFFFFF" },
+      "effect": { "type": "shadow", "shadowType": "outer", "offset": { "x": 0, "y": 12 }, "blur": 28, "color": "#173E2B18" }
+    },
+    {
+      "type": "ellipse",
+      "id": "cat_bubble_1",
+      "x": 68,
+      "y": 314,
+      "width": 38,
+      "height": 38,
+      "fill": { "type": "color", "color": "#EAF5EE" }
+    },
+    {
+      "type": "icon_font",
+      "id": "cat_icon_1",
+      "iconFontFamily": "lucide",
+      "iconFontName": "book-open",
+      "x": 76,
+      "y": 322,
+      "width": 22,
+      "height": 22,
+      "fill": { "type": "color", "color": "#257343" }
+    },
+    {
+      "type": "text",
+      "id": "cat_label_1",
+      "content": "学习互助",
+      "x": 59,
+      "y": 366,
+      "fontFamily": "Inter",
+      "fontSize": 14,
+      "fontWeight": "700",
+      "fill": { "type": "color", "color": "#18211D" }
+    },
+    {
+      "type": "ellipse",
+      "id": "cat_bubble_2",
+      "x": 161,
+      "y": 314,
+      "width": 38,
+      "height": 38,
+      "fill": { "type": "color", "color": "#EAF5EE" }
+    },
+    {
+      "type": "icon_font",
+      "id": "cat_icon_2",
+      "iconFontFamily": "lucide",
+      "iconFontName": "shopping-bag",
+      "x": 169,
+      "y": 322,
+      "width": 22,
+      "height": 22,
+      "fill": { "type": "color", "color": "#257343" }
+    },
+    {
+      "type": "text",
+      "id": "cat_label_2",
+      "content": "二手交易",
+      "x": 152,
+      "y": 366,
+      "fontFamily": "Inter",
+      "fontSize": 14,
+      "fontWeight": "700",
+      "fill": { "type": "color", "color": "#18211D" }
+    },
+    {
+      "type": "ellipse",
+      "id": "cat_bubble_3",
+      "x": 254,
+      "y": 314,
+      "width": 38,
+      "height": 38,
+      "fill": { "type": "color", "color": "#EAF5EE" }
+    },
+    {
+      "type": "icon_font",
+      "id": "cat_icon_3",
+      "iconFontFamily": "lucide",
+      "iconFontName": "utensils",
+      "x": 262,
+      "y": 322,
+      "width": 22,
+      "height": 22,
+      "fill": { "type": "color", "color": "#257343" }
+    },
+    {
+      "type": "text",
+      "id": "cat_label_3",
+      "content": "食堂点评",
+      "x": 245,
+      "y": 366,
+      "fontFamily": "Inter",
+      "fontSize": 14,
+      "fontWeight": "700",
+      "fill": { "type": "color", "color": "#18211D" }
+    },
+    {
+      "type": "ellipse",
+      "id": "cat_bubble_4",
+      "x": 328,
+      "y": 314,
+      "width": 38,
+      "height": 38,
+      "fill": { "type": "color", "color": "#FFF0EA" }
+    },
+    {
+      "type": "icon_font",
+      "id": "cat_icon_4",
+      "iconFontFamily": "lucide",
+      "iconFontName": "sparkles",
+      "x": 336,
+      "y": 322,
+      "width": 22,
+      "height": 22,
+      "fill": { "type": "color", "color": "#F05A28" }
+    },
+    {
+      "type": "text",
+      "id": "cat_label_4",
+      "content": "活动广场",
+      "x": 319,
+      "y": 366,
+      "fontFamily": "Inter",
+      "fontSize": 14,
+      "fontWeight": "700",
+      "fill": { "type": "color", "color": "#18211D" }
+    },
+    {
+      "type": "ellipse",
+      "id": "cat_bubble_5",
+      "x": 68,
+      "y": 390,
+      "width": 38,
+      "height": 38,
+      "fill": { "type": "color", "color": "#F0F6F2" }
+    },
+    {
+      "type": "icon_font",
+      "id": "cat_icon_5",
+      "iconFontFamily": "lucide",
+      "iconFontName": "school",
+      "x": 76,
+      "y": 398,
+      "width": 22,
+      "height": 22,
+      "fill": { "type": "color", "color": "#257343" }
+    },
+    {
+      "type": "text",
+      "id": "cat_label_5",
+      "content": "校园生活",
+      "x": 59,
+      "y": 437,
+      "fontFamily": "Inter",
+      "fontSize": 14,
+      "fontWeight": "700",
+      "fill": { "type": "color", "color": "#18211D" }
+    },
+    {
+      "type": "ellipse",
+      "id": "cat_bubble_6",
+      "x": 161,
+      "y": 390,
+      "width": 38,
+      "height": 38,
+      "fill": { "type": "color", "color": "#FFF3F1" }
+    },
+    {
+      "type": "icon_font",
+      "id": "cat_icon_6",
+      "iconFontFamily": "lucide",
+      "iconFontName": "heart",
+      "x": 169,
+      "y": 398,
+      "width": 22,
+      "height": 22,
+      "fill": { "type": "color", "color": "#EB3D32" }
+    },
+    {
+      "type": "text",
+      "id": "cat_label_6",
+      "content": "表白墙",
+      "x": 159,
+      "y": 437,
+      "fontFamily": "Inter",
+      "fontSize": 14,
+      "fontWeight": "700",
+      "fill": { "type": "color", "color": "#18211D" }
+    },
+    {
+      "type": "ellipse",
+      "id": "cat_bubble_7",
+      "x": 254,
+      "y": 390,
+      "width": 38,
+      "height": 38,
+      "fill": { "type": "color", "color": "#EAF5EE" }
+    },
+    {
+      "type": "icon_font",
+      "id": "cat_icon_7",
+      "iconFontFamily": "lucide",
+      "iconFontName": "badge-check",
+      "x": 262,
+      "y": 398,
+      "width": 22,
+      "height": 22,
+      "fill": { "type": "color", "color": "#257343" }
+    },
+    {
+      "type": "text",
+      "id": "cat_label_7",
+      "content": "兴趣圈子",
+      "x": 245,
+      "y": 437,
+      "fontFamily": "Inter",
+      "fontSize": 14,
+      "fontWeight": "700",
+      "fill": { "type": "color", "color": "#18211D" }
+    },
+    {
+      "type": "ellipse",
+      "id": "cat_bubble_8",
+      "x": 328,
+      "y": 390,
+      "width": 38,
+      "height": 38,
+      "fill": { "type": "color", "color": "#F2F4F3" }
+    },
+    {
+      "type": "icon_font",
+      "id": "cat_icon_8",
+      "iconFontFamily": "lucide",
+      "iconFontName": "layout-grid",
+      "x": 336,
+      "y": 398,
+      "width": 22,
+      "height": 22,
+      "fill": { "type": "color", "color": "#303735" }
+    },
+    {
+      "type": "text",
+      "id": "cat_label_8",
+      "content": "更多板块",
+      "x": 319,
+      "y": 437,
+      "fontFamily": "Inter",
+      "fontSize": 14,
+      "fontWeight": "700",
+      "fill": { "type": "color", "color": "#18211D" }
+    },
+    {
+      "type": "text",
+      "id": "news_section_title",
+      "content": "校园头条",
+      "x": 18,
+      "y": 480,
+      "fontFamily": "Inter",
+      "fontSize": 21,
+      "fontWeight": "800",
+      "fill": { "type": "color", "color": "#111A16" }
+    },
+    {
+      "type": "text",
+      "id": "news_more",
+      "content": "更多",
+      "x": 342,
+      "y": 486,
+      "fontFamily": "Inter",
+      "fontSize": 13,
+      "fontWeight": "700",
+      "fill": { "type": "color", "color": "#9CA39F" }
+    },
+    {
+      "type": "icon_font",
+      "id": "news_more_icon",
+      "iconFontFamily": "lucide",
+      "iconFontName": "chevron-right",
+      "x": 371,
+      "y": 484,
+      "width": 15,
+      "height": 15,
+      "fill": { "type": "color", "color": "#9CA39F" }
+    },
+    {
+      "type": "text",
+      "id": "news_title_1",
+      "content": "武汉城市学院2024届毕业典礼圆满落幕",
+      "x": 18,
+      "y": 523,
+      "fontFamily": "Inter",
+      "fontSize": 15,
+      "fontWeight": "800",
+      "fill": { "type": "color", "color": "#101815" }
+    },
+    {
+      "type": "text",
+      "id": "news_desc_1",
+      "content": "愿此去繁花似锦，归来仍是少年",
+      "x": 18,
+      "y": 550,
+      "fontFamily": "Inter",
+      "fontSize": 12,
+      "fontWeight": "500",
+      "fill": { "type": "color", "color": "#858B88" }
+    },
+    {
+      "type": "text",
+      "id": "news_meta_1",
+      "content": "05-18      2.2k浏览",
+      "x": 18,
+      "y": 575,
+      "fontFamily": "Inter",
+      "fontSize": 12,
+      "fontWeight": "600",
+      "fill": { "type": "color", "color": "#858B88" }
+    },
+    {
+      "type": "text",
+      "id": "news_pin_tag",
+      "content": "置顶",
+      "x": 236,
+      "y": 524,
+      "fontFamily": "Inter",
+      "fontSize": 11,
+      "fontWeight": "800",
+      "fill": { "type": "color", "color": "#348251" }
+    },
+    {
+      "type": "rectangle",
+      "id": "news_thumb_1",
+      "name": "毕业典礼缩略图",
+      "x": 292,
+      "y": 520,
+      "width": 82,
+      "height": 51,
+      "cornerRadius": 8,
+      "fill": {
+        "type": "gradient",
+        "gradientType": "linear",
+        "rotation": 180,
+        "colors": [
+          { "color": "#C9E8F4", "position": 0 },
+          { "color": "#4D9567", "position": 1 }
+        ]
+      }
+    },
+    {
+      "type": "text",
+      "id": "news_title_2",
+      "content": "东湖骑行打卡活动火热进行中",
+      "x": 18,
+      "y": 605,
+      "fontFamily": "Inter",
+      "fontSize": 15,
+      "fontWeight": "800",
+      "fill": { "type": "color", "color": "#101815" }
+    },
+    {
+      "type": "text",
+      "id": "news_desc_2",
+      "content": "共赴绿色校园，守护东湖之美",
+      "x": 18,
+      "y": 632,
+      "fontFamily": "Inter",
+      "fontSize": 12,
+      "fontWeight": "500",
+      "fill": { "type": "color", "color": "#858B88" }
+    },
+    {
+      "type": "text",
+      "id": "news_meta_2",
+      "content": "05-16      1.8k浏览",
+      "x": 18,
+      "y": 657,
+      "fontFamily": "Inter",
+      "fontSize": 12,
+      "fontWeight": "600",
+      "fill": { "type": "color", "color": "#858B88" }
+    },
+    {
+      "type": "rectangle",
+      "id": "news_thumb_2",
+      "name": "骑行活动缩略图",
+      "x": 292,
+      "y": 600,
+      "width": 82,
+      "height": 51,
+      "cornerRadius": 8,
+      "fill": {
+        "type": "gradient",
+        "gradientType": "linear",
+        "rotation": 180,
+        "colors": [
+          { "color": "#E8F6E9", "position": 0 },
+          { "color": "#2F7E4B", "position": 1 }
+        ]
+      }
+    },
+    {
+      "type": "text",
+      "id": "news_title_3",
+      "content": "学校开展“书香校园”主题活动",
+      "x": 18,
+      "y": 684,
+      "fontFamily": "Inter",
+      "fontSize": 15,
+      "fontWeight": "800",
+      "fill": { "type": "color", "color": "#101815" }
+    },
+    {
+      "type": "text",
+      "id": "news_desc_3",
+      "content": "阅读点亮生活，书香润泽心灵",
+      "x": 18,
+      "y": 711,
+      "fontFamily": "Inter",
+      "fontSize": 12,
+      "fontWeight": "500",
+      "fill": { "type": "color", "color": "#858B88" }
+    },
+    {
+      "type": "text",
+      "id": "news_meta_3",
+      "content": "05-15      6.4k浏览",
+      "x": 18,
+      "y": 736,
+      "fontFamily": "Inter",
+      "fontSize": 12,
+      "fontWeight": "600",
+      "fill": { "type": "color", "color": "#858B88" }
+    },
+    {
+      "type": "rectangle",
+      "id": "news_thumb_3",
+      "name": "书香校园缩略图",
+      "x": 292,
+      "y": 680,
+      "width": 82,
+      "height": 51,
+      "cornerRadius": 8,
+      "fill": {
+        "type": "gradient",
+        "gradientType": "linear",
+        "rotation": 180,
+        "colors": [
+          { "color": "#F4F0E7", "position": 0 },
+          { "color": "#78B278", "position": 1 }
+        ]
+      }
+    },
+    {
+      "type": "rectangle",
+      "id": "open_day_banner",
+      "name": "校园开放日横幅",
+      "x": 18,
+      "y": 760,
+      "width": 357,
+      "height": 80,
+      "cornerRadius": 14,
+      "fill": {
+        "type": "gradient",
+        "gradientType": "linear",
+        "rotation": 90,
+        "colors": [
+          { "color": "#287749", "position": 0 },
+          { "color": "#91C9B8", "position": 1 }
+        ]
+      }
+    },
+    {
+      "type": "text",
+      "id": "open_day_title",
+      "content": "校园开放日",
+      "x": 36,
+      "y": 777,
+      "fontFamily": "Inter",
+      "fontSize": 20,
+      "fontWeight": "800",
+      "fill": { "type": "color", "color": "#FFFFFF" }
+    },
+    {
+      "type": "text",
+      "id": "open_day_subtitle",
+      "content": "相约城院，共赴未来",
+      "x": 36,
+      "y": 808,
+      "fontFamily": "Inter",
+      "fontSize": 13,
+      "fontWeight": "700",
+      "fill": { "type": "color", "color": "#FFFFFF" }
+    },
+    {
+      "type": "ellipse",
+      "id": "open_day_button",
+      "x": 322,
+      "y": 778,
+      "width": 44,
+      "height": 44,
+      "fill": { "type": "color", "color": "#FFFFFF" }
+    },
+    {
+      "type": "icon_font",
+      "id": "open_day_arrow",
+      "iconFontFamily": "lucide",
+      "iconFontName": "chevron-right",
+      "x": 336,
+      "y": 791,
+      "width": 18,
+      "height": 18,
+      "fill": { "type": "color", "color": "#164C32" }
+    },
+    {
+      "type": "rectangle",
+      "id": "bottom_nav_bg",
+      "name": "底部导航白底",
+      "x": 0,
+      "y": 758,
+      "width": 393,
+      "height": 94,
+      "cornerRadius": 24,
+      "fill": { "type": "color", "color": "#FFFFFFF5" },
+      "effect": { "type": "shadow", "shadowType": "outer", "offset": { "x": 0, "y": -10 }, "blur": 30, "color": "#173E2B1F" }
+    },
+    {
+      "type": "icon_font",
+      "id": "tab_home_icon",
+      "iconFontFamily": "lucide",
+      "iconFontName": "house",
+      "x": 42,
+      "y": 786,
+      "width": 25,
+      "height": 25,
+      "fill": { "type": "color", "color": "#268044" }
+    },
+    {
+      "type": "text",
+      "id": "tab_home_label",
+      "content": "首页",
+      "x": 39,
+      "y": 816,
+      "fontFamily": "Inter",
+      "fontSize": 12,
+      "fontWeight": "800",
+      "fill": { "type": "color", "color": "#268044" }
+    },
+    {
+      "type": "icon_font",
+      "id": "tab_discover_icon",
+      "iconFontFamily": "lucide",
+      "iconFontName": "compass",
+      "x": 117,
+      "y": 786,
+      "width": 25,
+      "height": 25,
+      "fill": { "type": "color", "color": "#5F6663" }
+    },
+    {
+      "type": "text",
+      "id": "tab_discover_label",
+      "content": "发现",
+      "x": 114,
+      "y": 816,
+      "fontFamily": "Inter",
+      "fontSize": 12,
+      "fontWeight": "700",
+      "fill": { "type": "color", "color": "#5F6663" }
+    },
+    {
+      "type": "ellipse",
+      "id": "tab_post_button",
+      "name": "发布按钮",
+      "x": 173,
+      "y": 775,
+      "width": 54,
+      "height": 54,
+      "fill": {
+        "type": "gradient",
+        "gradientType": "linear",
+        "rotation": 180,
+        "colors": [
+          { "color": "#1F8D4D", "position": 0 },
+          { "color": "#126E38", "position": 1 }
+        ]
+      },
+      "effect": { "type": "shadow", "shadowType": "outer", "offset": { "x": 0, "y": 10 }, "blur": 18, "color": "#146D3840" }
+    },
+    {
+      "type": "icon_font",
+      "id": "tab_post_icon",
+      "iconFontFamily": "lucide",
+      "iconFontName": "plus",
+      "x": 188,
+      "y": 790,
+      "width": 24,
+      "height": 24,
+      "fill": { "type": "color", "color": "#FFFFFF" }
+    },
+    {
+      "type": "icon_font",
+      "id": "tab_message_icon",
+      "iconFontFamily": "lucide",
+      "iconFontName": "message-circle",
+      "x": 267,
+      "y": 786,
+      "width": 25,
+      "height": 25,
+      "fill": { "type": "color", "color": "#5F6663" }
+    },
+    {
+      "type": "text",
+      "id": "tab_message_label",
+      "content": "消息",
+      "x": 264,
+      "y": 816,
+      "fontFamily": "Inter",
+      "fontSize": 12,
+      "fontWeight": "700",
+      "fill": { "type": "color", "color": "#5F6663" }
+    },
+    {
+      "type": "icon_font",
+      "id": "tab_profile_icon",
+      "iconFontFamily": "lucide",
+      "iconFontName": "user",
+      "x": 343,
+      "y": 786,
+      "width": 25,
+      "height": 25,
+      "fill": { "type": "color", "color": "#5F6663" }
+    },
+    {
+      "type": "text",
+      "id": "tab_profile_label",
+      "content": "我的",
+      "x": 340,
+      "y": 816,
+      "fontFamily": "Inter",
+      "fontSize": 12,
+      "fontWeight": "700",
+      "fill": { "type": "color", "color": "#5F6663" }
+    },
+    {
+      "type": "rectangle",
+      "id": "home_indicator",
+      "name": "Home Indicator",
+      "x": 126,
+      "y": 836,
+      "width": 141,
+      "height": 5,
+      "cornerRadius": 3,
+      "fill": { "type": "color", "color": "#050505" }
+    }
+  ]
+}

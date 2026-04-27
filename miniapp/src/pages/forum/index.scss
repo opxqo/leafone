@@ -1,0 +1,156 @@
+﻿.forum-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.forum-title {
+  display: block;
+  font-size: 58rpx;
+  color: #1f3b2d;
+  font-weight: 700;
+}
+
+.forum-subtitle {
+  display: block;
+  margin-top: 8rpx;
+  color: #6f8678;
+  font-size: 24rpx;
+}
+
+.publish-btn {
+  margin-top: 8rpx;
+  border-radius: 999rpx;
+  background: linear-gradient(130deg, #34a15f, #237d45);
+  color: #fff;
+  padding: 10rpx 22rpx;
+  font-size: 22rpx;
+}
+
+.search-box {
+  margin-top: 14rpx;
+}
+
+.forum-modules {
+  margin-top: 12rpx;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12rpx;
+}
+
+.module-tag {
+  padding: 10rpx 14rpx;
+  border-radius: 18rpx;
+  background: #f7faf8;
+  border: 1rpx solid #d7e6dc;
+  color: #4f675a;
+  font-size: 22rpx;
+}
+
+.topic-row {
+  margin-top: 10rpx;
+  display: flex;
+  gap: 10rpx;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.topic-chip {
+  min-width: 180rpx;
+  border-radius: 16rpx;
+  border: 1rpx solid #dae9de;
+  background: #eff7f1;
+  padding: 12rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 6rpx;
+}
+
+.topic-label {
+  color: #3d5f4c;
+  font-size: 22rpx;
+}
+
+.topic-heat {
+  color: #7d9186;
+  font-size: 20rpx;
+}
+
+.feed-tabs {
+  margin-top: 14rpx;
+  display: flex;
+  gap: 10rpx;
+}
+
+.feed-tab {
+  border-radius: 999rpx;
+  border: 1rpx solid #d5e4d9;
+  background: #fff;
+  color: #6d8276;
+  padding: 9rpx 20rpx;
+  font-size: 22rpx;
+}
+
+.feed-tab.active {
+  background: #dbf1e3;
+  color: #2a8650;
+  border-color: #9ecdb2;
+}
+
+.forum-feed {
+  margin-top: 12rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 10rpx;
+}
+
+.post-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+}
+
+.post-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.post-author {
+  display: block;
+  color: #243a2d;
+  font-size: 28rpx;
+  font-weight: 600;
+}
+
+.post-badge {
+  display: block;
+  margin-top: 4rpx;
+  color: #58a476;
+  font-size: 20rpx;
+}
+
+.post-more {
+  color: #85998d;
+  font-size: 26rpx;
+}
+
+.post-title {
+  color: #22392c;
+  font-size: 33rpx;
+  line-height: 1.35;
+  font-weight: 700;
+}
+
+.post-summary {
+  color: #6e8378;
+  font-size: 24rpx;
+  line-height: 1.6;
+}
+
+.post-stats {
+  display: flex;
+  gap: 22rpx;
+  color: #7d9186;
+  font-size: 22rpx;
+}
