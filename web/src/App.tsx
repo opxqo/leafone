@@ -7,6 +7,17 @@ import headline2Img from './assets/headline-2.jpg'
 import headline3Img from './assets/headline-3.jpg'
 import chevronRightMuted from './assets/chevron-right-muted.svg'
 import chevronRightPrimary from './assets/chevron-right-primary.svg'
+import forumIconActivity from './assets/forum-icon-activity.svg'
+import forumIconBadgePin from './assets/forum-icon-badge-pin.svg'
+import forumIconCanteen from './assets/forum-icon-canteen.svg'
+import forumIconCircle from './assets/forum-icon-circle.svg'
+import forumIconFlameBold from './assets/forum-icon-flame-bold.svg'
+import forumIconLearn from './assets/forum-icon-learn.svg'
+import forumIconMore from './assets/forum-icon-more.svg'
+import forumIconStatComment from './assets/forum-icon-stat-comment.svg'
+import forumIconStatLike from './assets/forum-icon-stat-like.svg'
+import forumIconStatShare from './assets/forum-icon-stat-share.svg'
+import forumIconTrade from './assets/forum-icon-trade.svg'
 import messageIconFollow from './assets/message-icon-follow.svg'
 import messageIconInteraction from './assets/message-icon-interaction.svg'
 import messageIconLike from './assets/message-icon-like.svg'
@@ -33,9 +44,15 @@ type Headline = {
 
 type ForumPost = {
   author: string
-  tag: string
+  badge: string
+  meta: string
   title: string
-  body: string
+  summary: string
+  module: string
+  avatar: string
+  price?: string
+  coverType: 'python' | 'bike'
+  avatarTone: 'male' | 'female'
   stats: string[]
 }
 
@@ -93,19 +110,35 @@ const headlines: Headline[] = [
   },
 ]
 
+const forumAvatarPool = Array.from(
+  { length: 6 },
+  (_, index) => `https://image.opxqo.cn/avatar/eg/${String(index + 1).padStart(3, '0')}.webp`,
+)
+
 const forumPosts: ForumPost[] = [
   {
     author: '计算机小林学长',
-    tag: '学长',
+    badge: '学长',
+    meta: '2分钟前   计算机学院',
     title: 'Python期末复习资料整理（附网盘）',
-    body: '整理了一些重点知识与模拟题，含食堂点评汇总模板。',
+    summary: '整理了一些Python期末复习资料和习题，包含重点知识点总结。',
+    module: '学习互助',
+    avatar: forumAvatarPool[0],
+    coverType: 'python',
+    avatarTone: 'male',
     stats: ['12', '48', '96'],
   },
   {
     author: '奶茶不加糖',
-    tag: '大二',
-    title: '出九成新自行车！速来',
-    body: '入店配两把锁，车况良好，适合日常通勤。',
+    badge: '大二',
+    meta: '8分钟前   传媒与设计学院',
+    title: '出九成新自行车！速来~',
+    summary: '个人原因转让，车况很好，骑行感受超棒，适合日常通勤。',
+    module: '二手交易',
+    avatar: forumAvatarPool[1],
+    price: '￥260',
+    coverType: 'bike',
+    avatarTone: 'female',
     stats: ['5', '23', '36'],
   },
 ]
@@ -153,7 +186,7 @@ function getHomeHeadlineMatches(keyword: string) {
 
 const bottomTabs: Array<{ key: TabKey; label: string; to: string; mark: string }> = [
   { key: 'home', label: '首页', to: '/', mark: 'H' },
-  { key: 'discover', label: '发现', to: '/discover', mark: 'D' },
+  { key: 'forum', label: '论坛', to: '/forum', mark: 'F' },
   { key: 'messages', label: '消息', to: '/messages', mark: 'M' },
   { key: 'profile', label: '我的', to: '/profile', mark: 'U' },
 ]
@@ -167,8 +200,20 @@ const discoverItems: Array<[string, string, string]> = [
   ['表白墙', '勇敢表达，说出你的心里话', '今日 46 帖'],
 ]
 
-const forumModuleLabels = ['学习互助', '二手交易', '食堂点评', '活动广场', '兴趣圈子', '全部板块']
-const forumTopicLabels = ['考研互助打卡', '东湖骑行路线推荐', '武城院春日限定']
+const forumModules = [
+  { label: '学习互助', icon: forumIconLearn, tone: 'green' },
+  { label: '二手交易', icon: forumIconTrade, tone: 'warm' },
+  { label: '食堂点评', icon: forumIconCanteen, tone: 'green' },
+  { label: '活动广场', icon: forumIconActivity, tone: 'orange' },
+  { label: '兴趣圈子', icon: forumIconCircle, tone: 'orange' },
+  { label: '全部板块', icon: forumIconMore, tone: 'gray' },
+]
+const forumTopicLabels = [
+  { label: '# 考研互助打卡', heat: '1.2w 讨论' },
+  { label: '# 东湖骑行路线推荐', heat: '8563 讨论' },
+  { label: '# 武城院春日限定', heat: '7432 讨论' },
+  { label: '# 期末复习资料', heat: '5890 讨论' },
+]
 const serviceMapPins = ['食堂', '图书馆', '体育馆', '教学楼', '宿舍']
 const commonServices = ['宿舍用电', '校园卡', '课程表', '打印服务', '报修服务']
 const serviceCategories = ['学习科研', '生活服务', '安全服务', '活动组织']
@@ -561,61 +606,125 @@ function DiscoverPage() {
 function ForumPage() {
   return (
     <PhonePage activeTab="forum" className="forum-page">
-      <section className="hero-mini">
-        <div>
+      <section className="forum-hero">
+        <div className="forum-hero-copy">
           <h2>校园论坛</h2>
           <p>连接你我，分享校园生活</p>
         </div>
-        <button type="button" className="publish-btn">
-          发布
-        </button>
+
+        <div className="forum-search-box">
+          <span className="forum-search-line-icon" />
+          <input type="text" aria-label="搜索论坛内容" placeholder="搜索帖子、话题、用户..." />
+          <button type="button" aria-label="搜索">
+            <span className="forum-scan-line-icon" />
+          </button>
+        </div>
+
+        <section className="card forum-module-card">
+          {forumModules.map((item) => (
+            <button key={item.label} type="button" className={`forum-module-item ${item.tone}`}>
+              <span className="forum-module-icon">
+                <img src={item.icon} alt="" />
+              </span>
+              <span>{item.label}</span>
+            </button>
+          ))}
+        </section>
       </section>
 
-      <div className="search-box">搜索帖子、话题、用户...</div>
-
-      <section className="card forum-module-row">
-        {forumModuleLabels.map((label) => (
-          <button key={label} type="button" className="mini-pill">
-            {label}
+      <div className="forum-section-title-row">
+        <h3>热门话题</h3>
+        <button type="button">
+          <span>更多</span>
+          <img src={chevronRightMuted} alt="" />
+        </button>
+      </div>
+      <div className="forum-topic-row">
+        {forumTopicLabels.map((topic, index) => (
+          <button key={topic.label} type="button" className={`forum-topic-chip tone-${index % 4}`}>
+            <strong>{topic.label}</strong>
+            <span>
+              <img className="forum-topic-fire" src={forumIconFlameBold} alt="" />
+              {topic.heat}
+            </span>
           </button>
         ))}
-      </section>
-
-      <SectionTitle title="热门话题" action="更多" />
-      <div className="topic-row">
-        {forumTopicLabels.map((topic) => (
-          <span key={topic} className="topic-chip">
-            #{topic}
-          </span>
-        ))}
       </div>
 
-      <div className="forum-tabs">
-        <button type="button" className="active">
-          最新
+      <div className="forum-filter-row">
+        <div className="forum-tabs">
+          <button type="button" className="active">
+            最新
+          </button>
+          <button type="button">推荐</button>
+          <button type="button">关注</button>
+        </div>
+        <button type="button" className="forum-sort-btn">
+          最新发布
+          <span />
         </button>
-        <button type="button">推荐</button>
-        <button type="button">关注</button>
       </div>
 
-      <section className="list-stack">
+      <section className="forum-feed-list">
         {forumPosts.map((post) => (
-          <article key={post.title} className="card post-card">
-            <header>
-              <div>
-                <h4>{post.author}</h4>
-                <span>{post.tag}</span>
+          <article key={post.title} className="forum-post-card">
+            <header className="forum-post-head">
+              <span className={`forum-post-avatar ${post.avatarTone}`}>
+                <img className="forum-post-avatar-img" src={post.avatar} alt={`${post.author}头像`} />
+              </span>
+              <div className="forum-post-author-block">
+                <div className="forum-post-author-row">
+                  <h4>{post.author}</h4>
+                  <span className="forum-post-badge">
+                    <img src={forumIconBadgePin} alt="" />
+                    {post.badge}
+                  </span>
+                </div>
+                <p>{post.meta}</p>
               </div>
-              <button type="button">...</button>
+              <button type="button" className="forum-post-more" aria-label="更多">
+                ...
+              </button>
             </header>
-            <Link to="/article" className="post-title">
-              {post.title}
-            </Link>
-            <p>{post.body}</p>
-            <footer>
-              <span>转 {post.stats[0]}</span>
-              <span>评 {post.stats[1]}</span>
-              <span>赞 {post.stats[2]}</span>
+
+            <div className="forum-post-body">
+              <div className="forum-post-main">
+                <Link to="/article" className="forum-post-title">
+                  {post.title}
+                </Link>
+                <p>{post.summary}</p>
+                {post.price ? (
+                  <strong className="forum-post-price">{post.price}</strong>
+                ) : (
+                  <span className="forum-post-module-badge">{post.module}</span>
+                )}
+              </div>
+              <div className="forum-post-cover">
+                {post.coverType === 'bike' ? (
+                  <img src={headline2Img} alt="" />
+                ) : (
+                  <div className="forum-python-cover">
+                    <strong>PYTHON</strong>
+                    <span>学习资料包</span>
+                    <small>PDF</small>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            <footer className="forum-post-stats">
+              <span>
+                <img className="forum-stat-icon" src={forumIconStatShare} alt="" />
+                {post.stats[0]}
+              </span>
+              <span>
+                <img className="forum-stat-icon" src={forumIconStatComment} alt="" />
+                {post.stats[1]}
+              </span>
+              <span>
+                <img className="forum-stat-icon" src={forumIconStatLike} alt="" />
+                {post.stats[2]}
+              </span>
             </footer>
           </article>
         ))}

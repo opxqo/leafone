@@ -32,8 +32,14 @@ export interface ForumPost {
   id: string
   author: string
   badge: string
+  meta: string
   title: string
   summary: string
+  module: string
+  avatar: string
+  price?: string
+  coverType: 'python' | 'bike'
+  avatarTone: 'male' | 'female'
   stats: {
     share: number
     comment: number

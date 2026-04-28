@@ -42,19 +42,34 @@ export const homeMockData: HomeData = {
   bannerSubtitle: '相约城院，共赴未来',
 }
 
+const forumAvatarPool = Array.from(
+  { length: 6 },
+  (_, index) => `https://image.opxqo.cn/avatar/eg/${String(index + 1).padStart(3, '0')}.webp`,
+)
+
+function getForumAvatar(index: number) {
+  return forumAvatarPool[index % forumAvatarPool.length]
+}
+
 export const forumMockData: ForumData = {
   topics: [
     { id: 'topic-1', label: '# 考研互助打卡', heat: '1.2w 讨论' },
     { id: 'topic-2', label: '# 东湖骑行路线推荐', heat: '8563 讨论' },
     { id: 'topic-3', label: '# 武城院春日限定', heat: '7432 讨论' },
+    { id: 'topic-4', label: '# 期末复习资料', heat: '5890 讨论' },
   ],
   posts: [
     {
       id: 'post-1',
       author: '计算机小林学长',
       badge: '学长',
+      meta: '2分钟前  计算机学院',
       title: 'Python期末复习资料整理（附网盘）',
-      summary: '整理了一些重点知识与模拟题，包含食堂点评汇总模版。',
+      summary: '整理了一些Python期末复习资料和习题，包含重点知识点总结。',
+      module: '学习互助',
+      avatar: getForumAvatar(0),
+      coverType: 'python',
+      avatarTone: 'male',
       stats: {
         share: 12,
         comment: 48,
@@ -65,8 +80,14 @@ export const forumMockData: ForumData = {
       id: 'post-2',
       author: '奶茶不加糖',
       badge: '大二',
+      meta: '8分钟前  传媒与设计学院',
       title: '出九成新自行车！速来~',
-      summary: '入店配两把锁，车况良好，适合日常通勤。',
+      summary: '个人原因转让，车况很好，骑行感受超棒，适合日常通勤。',
+      module: '二手交易',
+      avatar: getForumAvatar(1),
+      price: '￥260',
+      coverType: 'bike',
+      avatarTone: 'female',
       stats: {
         share: 5,
         comment: 23,
