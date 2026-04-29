@@ -1,5 +1,4 @@
-import { Image, Input, Text, View } from '@tarojs/components'
-import Taro from '@tarojs/taro'
+import { Image, Input, Navigator, Text, View } from '@tarojs/components'
 import { useMemo, useState } from 'react'
 import MobileShell from '../../components/mobile-shell'
 import { useAsyncData } from '../../hooks/use-async-data'
@@ -20,7 +19,7 @@ import iconStatLike from './icon-stat-like.svg'
 import iconStatShare from './icon-stat-share.svg'
 import './index.scss'
 
-const FORUM_HERO_BG = 'https://image.opxqo.cn/home/top.webp'
+const FORUM_HERO_BG = 'https://image.opxqo.cn/forum/top.webp'
 
 const FORUM_MODULES = [
   { id: 'learn', label: '学习互助', icon: iconLearn, tone: 'green' },
@@ -38,7 +37,7 @@ function matchKeyword(field: string, keyword: string) {
 }
 
 export default function ForumPage() {
-  const data = useAsyncData<ForumData>(getForumData, [])
+  const data = useAsyncData<ForumData>(getForumData, [], null, 'forum')
   const [searchValue, setSearchValue] = useState('')
   const [searchKeyword, setSearchKeyword] = useState('')
 
@@ -159,17 +158,14 @@ export default function ForumPage() {
       <View className='forum-feed'>
         {visiblePosts.length ? (
           visiblePosts.map((post) => (
-            <View
+            <Navigator
               key={post.id}
               className='forum-post-card'
+              url='/pages/article/index'
+              openType='navigate'
               hoverClass='forum-post-card-pressed'
               hoverStartTime={0}
               hoverStayTime={120}
-              onClick={() => {
-                Taro.navigateTo({
-                  url: `/pages/article/index?id=${post.id}`,
-                })
-              }}
             >
               <View className='forum-post-head'>
                 <View className={`forum-post-avatar ${post.avatarTone}`}>
@@ -225,7 +221,7 @@ export default function ForumPage() {
                   <Text>{post.stats.like}</Text>
                 </View>
               </View>
-            </View>
+            </Navigator>
           ))
         ) : (
           <View className='forum-empty-state'>

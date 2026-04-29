@@ -9,6 +9,10 @@
 import type { ServiceAdapter } from './types'
 
 function wait(duration: number) {
+  if (duration <= 0) {
+    return Promise.resolve()
+  }
+
   return new Promise((resolve) => {
     setTimeout(resolve, duration)
   })
@@ -19,7 +23,7 @@ function getDelay() {
   if (Number.isFinite(raw) && raw >= 0) {
     return raw
   }
-  return 120
+  return 0
 }
 
 const delay = getDelay()

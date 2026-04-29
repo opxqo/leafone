@@ -6,6 +6,8 @@
     'pages/messages/index',
     'pages/profile/index',
     'pages/article/index',
+    'pages/login/index',
+    'pages/register/index',
   ],
   window: {
     backgroundTextStyle: 'light',

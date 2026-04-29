@@ -4,38 +4,8 @@
   background: linear-gradient(180deg, #eef4f0 0%, #f8faf8 38%, #f4f7f4 100%);
 }
 
-.status-strip {
+.top-safe-area {
   height: 52rpx;
-  padding: 16rpx 28rpx 0;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.status-time {
-  color: #1f2f25;
-  font-size: 24rpx;
-  font-weight: 700;
-}
-
-.status-icons {
-  display: flex;
-  align-items: center;
-  gap: 8rpx;
-}
-
-.status-dot {
-  width: 10rpx;
-  height: 10rpx;
-  border-radius: 10rpx;
-  background: #1a2a20;
-}
-
-.status-bar {
-  width: 28rpx;
-  height: 10rpx;
-  border-radius: 10rpx;
-  background: #1a2a20;
 }
 
 .mobile-body {

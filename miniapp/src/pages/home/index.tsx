@@ -94,7 +94,7 @@ function getMatchedHeadlines(keyword: string) {
 }
 
 export default function HomePage() {
-  const data = useAsyncData<HomeData>(getHomeData, [])
+  const data = useAsyncData<HomeData>(getHomeData, [], null, 'home')
   const [searchValue, setSearchValue] = useState('')
   const [searchKeyword, setSearchKeyword] = useState('')
   const visibleHeadlines = useMemo(() => getMatchedHeadlines(searchKeyword), [searchKeyword])

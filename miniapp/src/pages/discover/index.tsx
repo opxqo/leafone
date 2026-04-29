@@ -12,6 +12,7 @@ export default function DiscoverPage() {
     getDiscoverCategories,
     [],
     EMPTY_CATEGORIES,
+    'discover-categories',
   )
 
   return (

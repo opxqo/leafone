@@ -222,10 +222,11 @@ export const messageMockData: MessageItem[] = [
 ]
 
 export const profileMockData: ProfileData = {
-  name: '计算机小林学长',
-  identity: '计算机学院 · 软件工程专业',
+  name: '林一航',
+  identity: '计算机学院 · 2021级',
   studentId: '学号: 2022123456',
-  balance: '120.50',
+  avatar: 'https://image.opxqo.cn/avatar/eg/001.webp',
+  balance: '128.5',
   walletActions: [
     { id: 'wallet-1', title: '充值' },
     { id: 'wallet-2', title: '交易记录' },

@@ -103,6 +103,7 @@ export interface ProfileData {
   name: string
   identity: string
   studentId: string
+  avatar?: string
   balance: string
   walletActions: ProfileAction[]
   settings: string[]

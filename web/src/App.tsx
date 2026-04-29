@@ -1,7 +1,20 @@
 ﻿import { useMemo, useState } from 'react'
-import type { ReactNode } from 'react'
+import type { KeyboardEvent, ReactNode } from 'react'
 import { memo, useCallback } from 'react'
-import { HashRouter, Link, Route, Routes, useLocation } from 'react-router-dom'
+import { HashRouter, Link, Route, Routes, useLocation, useNavigate } from 'react-router-dom'
+import authIconBack from './assets/auth-icon-back.svg'
+import authIconCode from './assets/auth-icon-code.svg'
+import authIconCollege from './assets/auth-icon-college.svg'
+import authIconEyeOff from './assets/auth-icon-eye-off.svg'
+import authIconIdCard from './assets/auth-icon-id-card.svg'
+import authIconLock from './assets/auth-icon-lock.svg'
+import authIconPhone from './assets/auth-icon-phone.svg'
+import authIconShield from './assets/auth-icon-shield.svg'
+import authIconUser from './assets/auth-icon-user.svg'
+import authIconWechat from './assets/auth-icon-wechat.svg'
+import articleFileExcel from './assets/article-file-excel.svg'
+import articleFilePdf from './assets/article-file-pdf.svg'
+import articleFileWord from './assets/article-file-word.svg'
 import headline1Img from './assets/headline-1.jpg'
 import headline2Img from './assets/headline-2.jpg'
 import headline3Img from './assets/headline-3.jpg'
@@ -29,6 +42,20 @@ import messageListLike from './assets/message-list-like.svg'
 import messageListReply from './assets/message-list-reply.svg'
 import messageListSchoolNotice from './assets/message-list-school-notice.svg'
 import messageListSystem from './assets/message-list-system.svg'
+import profileIconLogout from './assets/profile-icon-logout.svg'
+import profileIconPinWhite from './assets/profile-icon-pin-white.svg'
+import profileIconVerify from './assets/profile-icon-verify.svg'
+import profilePowerChart from './assets/profile-power-chart.svg'
+import profileServiceBook from './assets/profile-service-book.svg'
+import profileServiceBookmark from './assets/profile-service-bookmark.svg'
+import profileServiceBriefcase from './assets/profile-service-briefcase.svg'
+import profileServiceCalendar from './assets/profile-service-calendar.svg'
+import profileServiceClipboard from './assets/profile-service-clipboard.svg'
+import profileServiceMore from './assets/profile-service-more.svg'
+import profileSettingHelp from './assets/profile-setting-help.svg'
+import profileSettingInfo from './assets/profile-setting-info.svg'
+import profileSettingMessage from './assets/profile-setting-message.svg'
+import profileSettingUser from './assets/profile-setting-user.svg'
 
 type TabKey = 'home' | 'discover' | 'forum' | 'messages' | 'profile'
 
@@ -57,6 +84,8 @@ type ForumPost = {
 }
 
 const quickRoutes: QuickRoute[] = [
+  { path: '/login', label: '登录' },
+  { path: '/register', label: '注册' },
   { path: '/', label: '首页' },
   { path: '/discover', label: '发现' },
   { path: '/forum', label: '论坛' },
@@ -71,6 +100,8 @@ const quickRoutes: QuickRoute[] = [
 ]
 
 const designFileMap: Record<string, string> = {
+  '/login': '登录&注册.png',
+  '/register': '登录&注册.png',
   '/': '首页.png',
   '/discover': '发现页.png',
   '/forum': '论坛页.png',
@@ -169,6 +200,33 @@ const homeHeadlines = [
 ]
 
 const homeOpenBannerBg = 'https://image.opxqo.cn/home/banner/001.webp'
+const profileChargingIcon = 'https://image.opxqo.cn/user/charging.webp'
+const authBgImage = 'https://image.opxqo.cn/login/top.webp'
+const authLogo = 'https://image.opxqo.cn/leafone_logo.webp'
+
+const registerFieldItems = [
+  { label: '姓名', icon: authIconUser },
+  { label: '学号', icon: authIconIdCard },
+  { label: '学院', icon: authIconCollege, extra: '⌄' },
+  { label: '手机号', icon: authIconPhone },
+  { label: '验证码', icon: authIconCode, action: '发送验证码' },
+  { label: '设置密码', icon: authIconLock, extraIcon: authIconEyeOff },
+]
+
+const articleFileIconMap = {
+  pdf: articleFilePdf,
+  word: articleFileWord,
+  excel: articleFileExcel,
+}
+
+const articleAttachments = [
+  { name: 'Python重点知识总结.pdf', size: '2.45MB', icon: articleFileIconMap.pdf },
+  { name: '常见题型与解析.pdf', size: '1.82MB', icon: articleFileIconMap.pdf },
+  { name: '实验报告模板.docx', size: '320KB', icon: articleFileIconMap.word },
+]
+
+const articleAuthorAvatar = 'https://image.opxqo.cn/avatar/eg/001.webp'
+const articleCommentAvatar = 'https://image.opxqo.cn/avatar/eg/002.webp'
 
 function getHomeHeadlineMatches(keyword: string) {
   const normalized = keyword.trim().toLowerCase()
@@ -281,19 +339,23 @@ const messageRows = [
 ]
 
 const profileServiceItems = [
-  '学业成绩',
-  '课程表',
-  '我的收藏',
-  '问卷调查',
-  '实习就业',
-  '荣誉奖项',
-  '助学金',
-  '考试安排',
-  '图书借阅',
-  '更多服务',
+  { title: '个人信息', icon: profileSettingUser, tone: 'green' },
+  { title: '课程表', icon: profileServiceCalendar, tone: 'blue' },
+  { title: '我的收藏', icon: profileServiceBookmark, tone: 'orange' },
+  { title: '问卷调查', icon: profileServiceClipboard, tone: 'purple' },
+  { title: '实习就业', icon: profileServiceBriefcase, tone: 'blue' },
+  { title: '意见反馈', icon: profileSettingMessage, tone: 'orange' },
+  { title: '帮助中心', icon: profileSettingHelp, tone: 'green' },
+  { title: '关于我们', icon: profileSettingInfo, tone: 'purple' },
+  { title: '图书借阅', icon: profileServiceBook, tone: 'blue' },
+  { title: '更多服务', icon: profileServiceMore, tone: 'gray' },
 ]
 
-const profileSettingItems = ['个人信息', '设置', '意见反馈', '帮助中心', '关于我们']
+const profilePowerStats = [
+  { label: '昨日用电', value: '3.2', unit: 'kWh' },
+  { label: '日均用电', value: '2.7', unit: 'kWh' },
+  { label: '本月用电', value: '128.5', unit: 'kWh' },
+]
 const profilePowerModules = ['学习互助', '二手交易', '食堂点评', '活动广场', '更多']
 const profilePowerChartValues = [25, 32, 38, 30, 50, 62, 54, 46, 58, 52, 48]
 const powerTrendValues = [14, 10, 20, 45, 60, 72, 66, 80, 76, 58, 34, 16]
@@ -357,6 +419,8 @@ function Studio() {
         <div className="phone-shell">
           <div className="phone-screen">
             <Routes>
+              <Route path="/login" element={<MemoLoginPage />} />
+              <Route path="/register" element={<MemoRegisterPage />} />
               <Route path="/" element={<MemoHomePage />} />
               <Route path="/discover" element={<MemoDiscoverPage />} />
               <Route path="/forum" element={<MemoForumPage />} />
@@ -411,14 +475,7 @@ function PhonePage({
 }: PhonePageProps) {
   return (
     <div className={`page-root ${className}`.trim()}>
-      <div className="status-bar">
-        <span>9:41</span>
-        <div className="status-icons">
-          <span className="dot" />
-          <span className="dot" />
-          <span className="bar" />
-        </div>
-      </div>
+      <div className="top-safe-area" />
 
       <div className="scroll-area">{children}</div>
 
@@ -463,6 +520,152 @@ const SectionTitle = memo(function SectionTitle({ title, action }: { title: stri
     </div>
   )
 })
+
+function AuthBrand({ compact = false }: { compact?: boolean }) {
+  return (
+    <section className={compact ? 'auth-brand compact' : 'auth-brand'}>
+      <img className="auth-logo" src={authLogo} alt="" />
+      <div>
+        <h1>城院圈</h1>
+        <p>武汉城市学院论坛</p>
+      </div>
+    </section>
+  )
+}
+
+function AuthField({
+  icon,
+  label,
+  action,
+  extra,
+  extraIcon,
+  input,
+  password,
+}: {
+  icon: string
+  label: string
+  action?: string
+  extra?: string
+  extraIcon?: string
+  input?: boolean
+  password?: boolean
+}) {
+  return (
+    <div className="auth-field">
+      <img className="auth-field-icon" src={icon} alt="" />
+      {input ? <input type={password ? 'password' : 'text'} placeholder={label} /> : <span>{label}</span>}
+      {action ? <em>{action}</em> : null}
+      {extra ? <strong>{extra}</strong> : null}
+      {extraIcon ? <img className="auth-field-extra" src={extraIcon} alt="" /> : null}
+    </div>
+  )
+}
+
+function LoginPage() {
+  const navigate = useNavigate()
+
+  return (
+    <PhonePage showBottomNav={false} className="auth-page login-auth-page">
+      <img className="auth-bg-image login-auth-bg" src={authBgImage} alt="" />
+      <div className="auth-bg-fade" />
+
+      <AuthBrand />
+
+      <section className="auth-card login-auth-card">
+        <h2>欢迎回来</h2>
+        <p>登录城院圈，发现校园新鲜事</p>
+
+        <AuthField icon={authIconUser} label="学号 / 手机号" input />
+        <AuthField icon={authIconLock} label="密码" input password extraIcon={authIconEyeOff} />
+
+        <div className="auth-option-row">
+          <span className="auth-remember">
+            <i>✓</i>
+            记住登录
+          </span>
+          <span>忘记密码？</span>
+        </div>
+
+        <button type="button" className="auth-primary-btn" onClick={() => navigate('/', { replace: true })}>
+          登录
+        </button>
+        <button type="button" className="auth-outline-btn" onClick={() => navigate('/register', { replace: true })}>
+          去注册
+        </button>
+
+        <div className="auth-divider">
+          <span />
+          <em>或使用以下方式登录</em>
+          <span />
+        </div>
+
+        <div className="auth-social-row">
+          <div className="auth-social-item">
+            <span>
+              <img src={authIconWechat} alt="" />
+            </span>
+            <p>微信登录</p>
+          </div>
+          <div className="auth-social-item">
+            <span>
+              <img src={authIconShield} alt="" />
+            </span>
+            <p>校园统一认证</p>
+          </div>
+        </div>
+      </section>
+
+      <footer className="auth-footer">
+        <span>武汉城市学院论坛 · 城院圈</span>
+        <span>© 2024 Wuhan City College</span>
+      </footer>
+    </PhonePage>
+  )
+}
+
+function RegisterPage() {
+  const navigate = useNavigate()
+
+  return (
+    <PhonePage showBottomNav={false} className="auth-page register-auth-page">
+      <img className="auth-bg-image register-auth-bg" src={authBgImage} alt="" />
+      <div className="auth-bg-fade register-auth-fade" />
+
+      <button type="button" className="auth-back-btn" aria-label="返回" onClick={() => navigate('/login', { replace: true })}>
+        <img src={authIconBack} alt="" />
+      </button>
+
+      <AuthBrand compact />
+
+      <section className="auth-card register-auth-card">
+        <h2>新用户注册</h2>
+        <p>加入城院圈，连接更多城院人</p>
+
+        <div className="register-field-list">
+          {registerFieldItems.map((item) => (
+            <AuthField key={item.label} {...item} />
+          ))}
+        </div>
+
+        <div className="register-agree-row">
+          <i />
+          <span>
+            我已阅读并同意
+            <b>《用户协议》</b>
+            <b>《隐私政策》</b>
+          </span>
+        </div>
+
+        <button type="button" className="auth-primary-btn register-submit-btn">注册并进入</button>
+
+        <div className="register-login-tip">
+          <span>已有账号？</span>
+          <button type="button" onClick={() => navigate('/login', { replace: true })}>去登录</button>
+        </div>
+      </section>
+    </PhonePage>
+  )
+}
 
 function HomePage() {
   const [searchValue, setSearchValue] = useState('')
@@ -604,6 +807,19 @@ function DiscoverPage() {
 }
 
 function ForumPage() {
+  const navigate = useNavigate()
+
+  const openArticle = () => {
+    navigate('/article')
+  }
+
+  const handleArticleKeyDown = (event: KeyboardEvent<HTMLElement>) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault()
+      openArticle()
+    }
+  }
+
   return (
     <PhonePage activeTab="forum" className="forum-page">
       <section className="forum-hero">
@@ -667,7 +883,14 @@ function ForumPage() {
 
       <section className="forum-feed-list">
         {forumPosts.map((post) => (
-          <article key={post.title} className="forum-post-card">
+          <article
+            key={post.title}
+            className="forum-post-card"
+            role="link"
+            tabIndex={0}
+            onClick={openArticle}
+            onKeyDown={handleArticleKeyDown}
+          >
             <header className="forum-post-head">
               <span className={`forum-post-avatar ${post.avatarTone}`}>
                 <img className="forum-post-avatar-img" src={post.avatar} alt={`${post.author}头像`} />
@@ -682,16 +905,18 @@ function ForumPage() {
                 </div>
                 <p>{post.meta}</p>
               </div>
-              <button type="button" className="forum-post-more" aria-label="更多">
+              <button
+                type="button"
+                className="forum-post-more"
+                aria-label="更多"
+              >
                 ...
               </button>
             </header>
 
             <div className="forum-post-body">
               <div className="forum-post-main">
-                <Link to="/article" className="forum-post-title">
-                  {post.title}
-                </Link>
+                <span className="forum-post-title">{post.title}</span>
                 <p>{post.summary}</p>
                 {post.price ? (
                   <strong className="forum-post-price">{post.price}</strong>
@@ -736,89 +961,111 @@ function ForumPage() {
 function ArticlePage() {
   return (
     <PhonePage className="article-page" showBottomNav={false}>
-      <header className="simple-nav">
-        <Link to="/forum" className="icon-button">
-          &lt;
+      <header className="article-top-nav">
+        <Link to="/forum" className="article-back-button" aria-label="返回论坛">
+          <span />
         </Link>
-        <button type="button" className="icon-button">
-          ...
+        <button type="button" className="article-more-button" aria-label="更多">
+          •••
         </button>
       </header>
 
-      <article className="article-body">
-        <div className="author-row">
-          <span className="avatar" />
-          <div>
-            <h4>计算机小林学长</h4>
-            <p>05-18 14:32 发布于 校园论坛</p>
+      <article className="article-content-flow">
+        <section className="article-author-section">
+          <img className="article-author-avatar" src={articleAuthorAvatar} alt="计算机小林学长头像" />
+          <div className="article-author-main">
+            <div className="article-author-name-row">
+              <h4>计算机小林学长</h4>
+              <span>
+                <i />
+                学长
+              </span>
+            </div>
+            <p>计算机学院 · 软件工程专业</p>
+            <p>05-18 14:32　发布于 校园论坛</p>
           </div>
-          <button type="button" className="follow-btn">
-            + 关注
-          </button>
+          <button type="button" className="article-follow-button">＋ 关注</button>
+        </section>
+
+        <h1>Python期末复习资料整理（附网盘）</h1>
+
+        <div className="article-module-chip">
+          <span>♟</span>
+          学习互助
+          <b>›</b>
         </div>
 
-        <h2>Python期末复习资料整理（附网盘）</h2>
-        <p>
-          整理了一些Python期末复习资料和习题，包含重点知识总结、
-          常见题型解析、模拟试卷，希望对大家有帮助。
+        <p className="article-paragraph">
+          整理了一些Python期末复习资料和习题，包含重点知识点总结、常见题型解析、模拟试卷等，希望对大家有帮助～
         </p>
 
-        <ul className="text-list">
+        <p className="article-folder-title">📁 资料目录如下：</p>
+        <ol className="article-number-list">
           <li>Python重点知识总结.pdf</li>
           <li>常见题型与解析.pdf</li>
           <li>模拟试卷（含答案）.pdf</li>
           <li>实验报告模板.docx</li>
-        </ul>
+        </ol>
 
-        <p>
-          网盘链接: <a href="https://pan.baidu.com">https://pan.baidu.com/s/xxxxxx</a>
+        <p className="article-link-line">
+          网盘链接：
+          <a href="https://pan.baidu.com/s/xxxxxx">https://pan.baidu.com/s/xxxxxx</a>
         </p>
+        <p className="article-code-line">提取码： py666</p>
+        <p className="article-wish-line">祝大家期末顺利，取得好成绩！ 💪</p>
 
-        <section className="card file-list">
-          <div className="file-row">
-            <span className="file-icon">PDF</span>
-            <div>
-              <h5>Python重点知识总结.pdf</h5>
-              <p>2.45MB</p>
+        <section className="article-file-card">
+          {articleAttachments.map((item) => (
+            <div key={item.name} className="article-file-row">
+              <img className="article-file-type-icon" src={item.icon} alt="" />
+              <div>
+                <h5>{item.name}</h5>
+                <p>{item.size}</p>
+              </div>
+              <button type="button" aria-label={`下载${item.name}`}>↓</button>
             </div>
-            <button type="button">下载</button>
-          </div>
-          <div className="file-row">
-            <span className="file-icon">PDF</span>
-            <div>
-              <h5>常见题型与解析.pdf</h5>
-              <p>1.82MB</p>
-            </div>
-            <button type="button">下载</button>
-          </div>
-          <div className="file-row">
-            <span className="file-icon doc">DOC</span>
-            <div>
-              <h5>实验报告模板.docx</h5>
-              <p>320KB</p>
-            </div>
-            <button type="button">下载</button>
-          </div>
+          ))}
         </section>
+
+        <div className="article-location-pill">
+          <i />
+          计算机学院教学楼 3号楼
+        </div>
+
+        <footer className="article-action-row">
+          <span>↗ 12</span>
+          <span>☰ 48</span>
+          <span>♡ 96</span>
+          <span>☆ 收藏</span>
+        </footer>
       </article>
 
-      <section className="card comment-list">
+      <section className="article-comments-panel">
         <header>
           <h3>全部评论（48）</h3>
-          <button type="button">默认排序</button>
+          <button type="button">默认排序⌄</button>
         </header>
-        <article className="comment-item">
-          <span className="avatar small" />
+        <article className="article-comment-item">
+          <img src={articleCommentAvatar} alt="奶茶不加糖头像" />
           <div>
-            <h4>奶茶不加糖</h4>
-            <p>太棒了！正好需要，感谢学长分享。</p>
+            <div className="article-comment-name-row">
+              <h4>奶茶不加糖</h4>
+              <span>● 大二</span>
+            </div>
+            <p>太棒了！正好需要，感谢学长分享～</p>
+            <footer>
+              <time>05-18 14:45</time>
+              <span>☰ 回复</span>
+              <span>♡ 8</span>
+            </footer>
           </div>
         </article>
       </section>
 
-      <footer className="comment-bar">
+      <footer className="article-comment-dock">
         <input type="text" value="写下你的评论..." readOnly />
-        <button type="button">发送</button>
+        <span>☺</span>
+        <span>▧</span>
       </footer>
     </PhonePage>
   )
@@ -998,50 +1245,99 @@ function MessagesPage() {
 }
 
 function ProfilePage() {
+  const navigate = useNavigate()
+
   return (
     <PhonePage activeTab="profile" className="profile-page">
-      <section className="profile-top">
-        <div className="profile-user">
-          <span className="avatar" />
-          <div>
-            <h3>计算机小林学长</h3>
-            <p>学号: 2022123456</p>
-            <p>计算机学院 · 软件工程专业</p>
+      <section className="profile-user-header">
+        <img
+          className="profile-avatar-img"
+          src="https://image.opxqo.cn/avatar/eg/001.webp"
+          alt="林一航头像"
+        />
+        <div className="profile-user-main">
+          <div className="profile-name-row">
+            <h3>林一航</h3>
+            <span className="profile-verify-pill">
+              <img src={profileIconVerify} alt="" />
+              学生认证
+            </span>
+          </div>
+          <p>计算机学院 · 2021级</p>
+        </div>
+      </section>
+
+      <section className="profile-power-card">
+        <div className="profile-power-summary">
+          <div className="profile-power-copy">
+            <h3>宿舍用电</h3>
+            <p className="profile-room-line">
+              <img src={profileIconPinWhite} alt="" />
+              桂园6舍 305
+            </p>
+            <div className="profile-power-value-line">
+              <strong>128.5</strong>
+              <span>kWh</span>
+            </div>
+            <p>本月用电</p>
+            <p>本月预计: 186.7 kWh</p>
+          </div>
+
+          <img className="profile-power-meter" src={profileChargingIcon} alt="" />
+        </div>
+
+        <div className="profile-chart-panel">
+          <div className="profile-chart-title-row">
+            <strong>72小时用电趋势</strong>
+            <span>(kWh)</span>
+          </div>
+          <div className="profile-chart-area">
+            <div className="profile-chart-axis">
+              <span>3.0</span>
+              <span>2.0</span>
+              <span>1.0</span>
+              <span>0</span>
+            </div>
+            <div className="profile-chart-main">
+              <img className="profile-chart-svg" src={profilePowerChart} alt="" />
+              <div className="profile-chart-dates">
+                <span>05/16 00:00</span>
+                <span>05/17 00:00</span>
+                <span>05/18 00:00</span>
+                <span>05/19 00:00</span>
+              </div>
+            </div>
+          </div>
+          <div className="profile-power-stats">
+            {profilePowerStats.map((item) => (
+              <div key={item.label} className="profile-power-stat">
+                <span>{item.label}</span>
+                <p>
+                  <strong>{item.value}</strong>
+                  {item.unit}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      <section className="wallet-card">
-        <h4>校园卡</h4>
-        <strong>￥120.50</strong>
-        <div className="wallet-actions">
-          <button type="button">充值</button>
-          <button type="button">交易记录</button>
-          <button type="button">挂失</button>
-          <button type="button">校园码</button>
+      <section className="profile-panel profile-services-panel">
+        <h3>我的服务</h3>
+        <div className="profile-service-grid">
+        {profileServiceItems.map((item) => (
+          <button type="button" key={item.title} className="profile-service-item">
+            <span className={`profile-service-icon-wrap ${item.tone}`}>
+              <img src={item.icon} alt="" />
+            </span>
+            <span>{item.title}</span>
+          </button>
+        ))}
         </div>
       </section>
 
-      <SectionTitle title="我的服务" />
-      <section className="card profile-service-grid">
-        {profileServiceItems.map((item) => (
-          <button type="button" key={item} className="module-btn compact">
-            <span className="module-icon" />
-            <span>{item}</span>
-          </button>
-        ))}
-      </section>
-
-      <section className="card settings-list">
-        {profileSettingItems.map((item) => (
-          <button key={item} type="button" className="setting-row">
-            <span>{item}</span>
-            <span>&gt;</span>
-          </button>
-        ))}
-      </section>
-
-      <button type="button" className="logout-btn">
+      <button type="button" className="profile-logout-btn" onClick={() => navigate('/login', { replace: true })}>
+        <img src={profileIconLogout} alt="" />
         退出登录
       </button>
     </PhonePage>
@@ -1285,6 +1581,8 @@ function PowerDetailPage() {
   )
 }
 
+const MemoLoginPage = memo(LoginPage)
+const MemoRegisterPage = memo(RegisterPage)
 const MemoHomePage = memo(HomePage)
 const MemoDiscoverPage = memo(DiscoverPage)
 const MemoForumPage = memo(ForumPage)

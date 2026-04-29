@@ -19,14 +19,7 @@ function MobileShell({
 }: MobileShellProps) {
   return (
     <View className={`mobile-shell ${className}`.trim()}>
-      <View className='status-strip'>
-        <View className='status-time'>9:41</View>
-        <View className='status-icons'>
-          <View className='status-dot' />
-          <View className='status-dot' />
-          <View className='status-bar' />
-        </View>
-      </View>
+      <View className='top-safe-area' />
 
       <View className='mobile-body'>{children}</View>
 
