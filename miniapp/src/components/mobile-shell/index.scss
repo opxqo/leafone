@@ -8,6 +8,10 @@
   height: 52rpx;
 }
 
+.auth-shell .top-safe-area {
+  background: transparent;
+}
+
 .mobile-body {
   padding: var(--page-top-offset) 24rpx calc(env(safe-area-inset-bottom) + 176rpx);
 }

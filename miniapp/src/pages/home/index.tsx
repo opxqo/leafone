@@ -1,4 +1,4 @@
-import { Image, Input, Text, View } from '@tarojs/components'
+import { Image, Input, Swiper, SwiperItem, Text, View } from '@tarojs/components'
 import Taro from '@tarojs/taro'
 import { useMemo, useState } from 'react'
 import MobileShell from '../../components/mobile-shell'
@@ -215,23 +215,37 @@ export default function HomePage() {
         )}
       </View>
 
-      <View
-        className='banner-card home-open-banner'
-        onClick={() => {
-          Taro.navigateTo({
-            url: '/pages/article/index?id=post-1',
-          })
-        }}
+      <Swiper
+        className='banner-swiper'
+        autoplay
+        circular
+        interval={3000}
+        indicatorDots
+        indicatorColor='rgba(255,255,255,0.4)'
+        indicatorActiveColor='#ffffff'
       >
-        <Image className='banner-bg-image' src={HOME_OPEN_BANNER_BG} mode='aspectFill' />
-        <View className='banner-copy'>
-          <Text className='banner-title'>校园开放日</Text>
-          <Text className='banner-subtitle'>相约城院，共赴未来</Text>
-        </View>
-        <View className='banner-arrow-wrap'>
-          <Image className='banner-arrow' src={chevronRightPrimary} mode='aspectFit' />
-        </View>
-      </View>
+        {[0, 1, 2].map((i) => (
+          <SwiperItem key={i}>
+            <View
+              className='banner-card home-open-banner'
+              onClick={() => {
+                Taro.navigateTo({
+                  url: `/pages/article/index?id=post-${i + 1}`,
+                })
+              }}
+            >
+              <Image className='banner-bg-image' src={HOME_OPEN_BANNER_BG} mode='aspectFill' />
+              <View className='banner-copy'>
+                <Text className='banner-title'>校园开放日</Text>
+                <Text className='banner-subtitle'>相约城院，共赴未来</Text>
+              </View>
+              <View className='banner-arrow-wrap'>
+                <Image className='banner-arrow' src={chevronRightPrimary} mode='aspectFit' />
+              </View>
+            </View>
+          </SwiperItem>
+        ))}
+      </Swiper>
     </MobileShell>
   )
 }
