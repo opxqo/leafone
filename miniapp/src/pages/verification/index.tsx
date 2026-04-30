@@ -1,6 +1,7 @@
 import { Image, Input, Picker, Text, View } from '@tarojs/components'
 import Taro from '@tarojs/taro'
 import { useState } from 'react'
+import CachedImage from '../../components/cached-image'
 import MobileShell from '../../components/mobile-shell'
 import { verifyStudent } from '../../services'
 
@@ -172,7 +173,7 @@ export default function VerificationPage() {
   return (
     <MobileShell activeNav='profile' className='verification-shell'>
       <View className='verification-page'>
-        <Image className='verification-bg-image' src={VERIFY_BG} mode='aspectFill' />
+        <CachedImage className='verification-bg-image' src={VERIFY_BG} mode='aspectFill' />
         <View className='verification-bg-fade' />
 
         <View className='verification-header'>

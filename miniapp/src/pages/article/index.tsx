@@ -1,5 +1,6 @@
 import { Image, Input, Text, View } from '@tarojs/components'
 import Taro, { useRouter } from '@tarojs/taro'
+import CachedImage from '../../components/cached-image'
 import MobileShell from '../../components/mobile-shell'
 import { useAsyncData } from '../../hooks/use-async-data'
 import { getArticleData, type ArticleData } from '../../services'
@@ -53,7 +54,7 @@ export default function ArticlePage() {
         </View>
 
         <View className='article-author-section'>
-          <Image className='article-author-avatar' src={AUTHOR_AVATAR} mode='aspectFill' />
+          <CachedImage className='article-author-avatar' src={AUTHOR_AVATAR} mode='aspectFill' />
           <View className='article-author-main'>
             <View className='article-author-name-row'>
               <Text className='article-author-name'>{data.author}</Text>
@@ -145,7 +146,7 @@ export default function ArticlePage() {
 
           {primaryComment ? (
             <View key={primaryComment.id} className='article-comment-item'>
-              <Image className='article-comment-avatar' src={COMMENT_AVATAR} mode='aspectFill' />
+              <CachedImage className='article-comment-avatar' src={COMMENT_AVATAR} mode='aspectFill' />
               <View className='article-comment-main'>
                 <View className='article-comment-name-row'>
                   <Text className='article-comment-author'>{primaryComment.author}</Text>

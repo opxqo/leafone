@@ -1,5 +1,6 @@
 import { Image, Text, View } from '@tarojs/components'
 import Taro from '@tarojs/taro'
+import CachedImage from '../../components/cached-image'
 import MobileShell from '../../components/mobile-shell'
 
 import iconBack from '../login/icon-back.svg'
@@ -50,7 +51,7 @@ export default function AboutPage() {
         </View>
 
         <View className='about-brand'>
-          <Image className='about-logo' src={ABOUT_LOGO} mode='aspectFit' />
+          <CachedImage className='about-logo' src={ABOUT_LOGO} mode='aspectFit' />
           <View className='about-brand-copy'>
             <Text className='about-brand-name'>城院圈</Text>
             <Text className='about-brand-subtitle'>武汉城市学院论坛</Text>
@@ -74,7 +75,7 @@ export default function AboutPage() {
         </View>
 
         <View className='about-bg-layer'>
-          <Image className='about-bg-image' src={ABOUT_BG} mode='scaleToFill' />
+          <CachedImage className='about-bg-image' src={ABOUT_BG} mode='scaleToFill' />
           <View className='about-bg-fade' />
         </View>
       </View>

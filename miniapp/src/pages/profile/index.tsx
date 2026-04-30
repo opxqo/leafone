@@ -1,5 +1,6 @@
 import { Image, Text, View } from '@tarojs/components'
 import Taro from '@tarojs/taro'
+import CachedImage from '../../components/cached-image'
 import MobileShell from '../../components/mobile-shell'
 import { useAsyncData } from '../../hooks/use-async-data'
 import { getProfileData, logoutLocally, type ProfileData } from '../../services'
@@ -77,7 +78,7 @@ export default function ProfilePage() {
   return (
     <MobileShell activeNav='profile' className='profile-shell'>
       <View className='profile-user-header'>
-        <Image className='profile-avatar-img' src={data.avatar || PROFILE_AVATAR} mode='aspectFill' />
+        <CachedImage className='profile-avatar-img' src={data.avatar || PROFILE_AVATAR} mode='aspectFill' />
         <View className='profile-user-main'>
           <View className='profile-name-row'>
             <Text className='profile-name'>{data.name}</Text>
@@ -91,7 +92,7 @@ export default function ProfilePage() {
       </View>
 
       <View className='profile-power-card'>
-        <Image className='profile-power-bg-image' src={PROFILE_METER_BG} mode='aspectFill' />
+        <CachedImage className='profile-power-bg-image' src={PROFILE_METER_BG} mode='aspectFill' />
         <View className='profile-power-overlay' />
 
         <View className='profile-power-summary'>
@@ -109,7 +110,7 @@ export default function ProfilePage() {
             <Text className='profile-power-estimate'>本月预计: 186.7 kWh</Text>
           </View>
 
-          <Image className='profile-power-meter' src={PROFILE_CHARGING_ICON} mode='aspectFit' />
+          <CachedImage className='profile-power-meter' src={PROFILE_CHARGING_ICON} mode='aspectFit' />
         </View>
 
         <View className='profile-chart-panel'>

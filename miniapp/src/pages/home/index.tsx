@@ -1,6 +1,7 @@
 import { Image, Input, Swiper, SwiperItem, Text, View } from '@tarojs/components'
 import Taro from '@tarojs/taro'
 import { useMemo, useState } from 'react'
+import CachedImage from '../../components/cached-image'
 import MobileShell from '../../components/mobile-shell'
 import { useAsyncData } from '../../hooks/use-async-data'
 import { getHomeData, type HomeData } from '../../services'
@@ -136,7 +137,7 @@ export default function HomePage() {
   return (
     <MobileShell activeNav='home' className='home-shell'>
       <View className='hero-card'>
-        <Image className='hero-bg-image' src={HOME_HERO_BG} mode='aspectFill' />
+        <CachedImage className='hero-bg-image' src={HOME_HERO_BG} mode='aspectFill' />
 
         <View className='hero-copy'>
           <Text className='hero-greeting'>{HERO_COPY.greeting}</Text>
@@ -234,7 +235,7 @@ export default function HomePage() {
                 })
               }}
             >
-              <Image className='banner-bg-image' src={HOME_OPEN_BANNER_BG} mode='aspectFill' />
+              <CachedImage className='banner-bg-image' src={HOME_OPEN_BANNER_BG} mode='aspectFill' />
               <View className='banner-copy'>
                 <Text className='banner-title'>校园开放日</Text>
                 <Text className='banner-subtitle'>相约城院，共赴未来</Text>

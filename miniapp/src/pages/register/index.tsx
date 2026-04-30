@@ -1,6 +1,7 @@
 import { Image, Input, Text, View } from '@tarojs/components'
 import Taro from '@tarojs/taro'
 import { useState } from 'react'
+import CachedImage from '../../components/cached-image'
 import MobileShell from '../../components/mobile-shell'
 import { registerStudent } from '../../services'
 
@@ -126,7 +127,7 @@ export default function RegisterPage() {
   return (
     <MobileShell showBottomNav={false} className='auth-shell register-shell' requireAuth={false}>
       <View className='auth-page auth-register-page'>
-        <Image className='auth-bg-image auth-register-bg' src={AUTH_BG} mode='aspectFill' />
+        <CachedImage className='auth-bg-image auth-register-bg' src={AUTH_BG} mode='aspectFill' />
         <View className='auth-bg-fade register-bg-fade' />
 
         <View className='auth-back-btn' onClick={handleBackToLogin}>
@@ -134,7 +135,7 @@ export default function RegisterPage() {
         </View>
 
         <View className='auth-brand register-brand'>
-          <Image className='auth-logo' src={AUTH_LOGO} mode='aspectFit' />
+          <CachedImage className='auth-logo' src={AUTH_LOGO} mode='aspectFit' />
           <View className='auth-brand-copy'>
             <Text className='auth-brand-title'>城院圈</Text>
             <Text className='auth-brand-subtitle'>武汉城市学院论坛</Text>

@@ -1,5 +1,6 @@
 import { Image, Input, Navigator, Text, View } from '@tarojs/components'
 import { useMemo, useState } from 'react'
+import CachedImage from '../../components/cached-image'
 import MobileShell from '../../components/mobile-shell'
 import { useAsyncData } from '../../hooks/use-async-data'
 import { getForumData, type ForumData } from '../../services'
@@ -73,7 +74,7 @@ export default function ForumPage() {
   return (
     <MobileShell activeNav='forum' className='forum-shell'>
       <View className='forum-hero'>
-        <Image className='forum-bg-image' src={FORUM_HERO_BG} mode='aspectFill' />
+        <CachedImage className='forum-bg-image' src={FORUM_HERO_BG} mode='aspectFill' />
         <View className='forum-hero-fade' />
 
         <View className='forum-head'>
@@ -169,7 +170,7 @@ export default function ForumPage() {
             >
               <View className='forum-post-head'>
                 <View className={`forum-post-avatar ${post.avatarTone}`}>
-                  <Image className='forum-post-avatar-img' src={post.avatar} mode='aspectFill' />
+                  <CachedImage className='forum-post-avatar-img' src={post.avatar} mode='aspectFill' />
                 </View>
                 <View className='forum-post-author-block'>
                   <View className='forum-post-author-row'>

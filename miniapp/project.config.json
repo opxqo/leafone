@@ -2,7 +2,7 @@
   "miniprogramRoot": "./dist",
   "projectname": "miniapp",
   "description": "LeafOne Forum Mini Program",
-  "appid": "touristappid",
+  "appid": "wx3401759350fb6835",
   "setting": {
     "urlCheck": true,
     "es6": false,

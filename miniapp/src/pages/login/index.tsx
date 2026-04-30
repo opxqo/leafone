@@ -1,6 +1,7 @@
 import { Image, Input, Text, View } from '@tarojs/components'
 import Taro from '@tarojs/taro'
 import { useState } from 'react'
+import CachedImage from '../../components/cached-image'
 import MobileShell from '../../components/mobile-shell'
 import { loginWithPassword, loginWithWechat } from '../../services'
 
@@ -145,11 +146,11 @@ export default function LoginPage() {
   return (
     <MobileShell showBottomNav={false} className='auth-shell login-shell' requireAuth={false}>
       <View className='auth-page auth-login-page'>
-        <Image className='auth-bg-image auth-login-bg' src={AUTH_BG} mode='aspectFill' />
+        <CachedImage className='auth-bg-image auth-login-bg' src={AUTH_BG} mode='aspectFill' />
         <View className='auth-bg-fade' />
 
         <View className='auth-brand login-brand'>
-          <Image className='auth-logo' src={AUTH_LOGO} mode='aspectFit' />
+          <CachedImage className='auth-logo' src={AUTH_LOGO} mode='aspectFit' />
           <View className='auth-brand-copy'>
             <Text className='auth-brand-title'>城院圈</Text>
             <Text className='auth-brand-subtitle'>武汉城市学院论坛</Text>

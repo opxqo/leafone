@@ -1,4 +1,5 @@
 ﻿import { Text, View } from '@tarojs/components'
+import CachedImage from '../../components/cached-image'
 import MobileShell from '../../components/mobile-shell'
 import { useAsyncData } from '../../hooks/use-async-data'
 import { getMessages, type MessageItem } from '../../services'
@@ -43,7 +44,7 @@ export default function MessagesPage() {
   return (
     <MobileShell activeNav='messages' className='message-shell'>
       <View className='message-hero'>
-        <Image className='message-bg-image' src={MESSAGE_TOP_BG} mode='widthFix' />
+        <CachedImage className='message-bg-image' src={MESSAGE_TOP_BG} mode='widthFix' />
         <View className='message-bg-fade' />
 
         <View className='message-head'>
