@@ -56,6 +56,11 @@
   flex: 0 0 auto;
 }
 
+.profile-verify-pill.denied {
+  color: #cd0000;
+  background: #ffe9e9;
+}
+
 .profile-verify-icon {
   width: 28rpx;
   height: 28rpx;

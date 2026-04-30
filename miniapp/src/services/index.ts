@@ -42,7 +42,7 @@ export function getMessages(): Promise<MessageItem[]> {
 }
 
 export function getProfileData(): Promise<ProfileData> {
-  return adapter.fetchProfileData()
+  return httpAdapter.fetchProfileData()
 }
 
 export {
@@ -70,6 +70,9 @@ export type {
   Headline,
   HomeData,
   MessageItem,
+  MeProfileResponse,
+  MeProfileUser,
+  MeStudentProfile,
   ProfileData,
   ShortcutModule,
 } from './types'

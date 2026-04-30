@@ -3,6 +3,7 @@ import Taro from '@tarojs/taro'
 import MobileShell from '../../components/mobile-shell'
 import { useAsyncData } from '../../hooks/use-async-data'
 import { getProfileData, logoutLocally, type ProfileData } from '../../services'
+import { getAccessToken } from '../../services/request'
 
 import iconLogout from './icon-logout.svg'
 import iconPinWhite from './icon-pin-white.svg'
@@ -17,6 +18,7 @@ import iconSettingInfo from './icon-setting-info.svg'
 import iconSettingMessage from './icon-setting-message.svg'
 import iconSettingUser from './icon-setting-user.svg'
 import iconVerify from './icon-verify.svg'
+import iconVerifyDenied from './icon-verify-denied.svg'
 import powerChart from './profile-power-chart.svg'
 import './index.scss'
 
@@ -44,7 +46,8 @@ const POWER_STATS = [
 ]
 
 export default function ProfilePage() {
-  const data = useAsyncData<ProfileData>(getProfileData, [], null, 'profile')
+  const profileCacheKey = `profile:${getAccessToken() || 'guest'}`
+  const data = useAsyncData<ProfileData>(getProfileData, [profileCacheKey], null, profileCacheKey)
 
   const handleLogout = () => {
     logoutLocally()
@@ -78,12 +81,12 @@ export default function ProfilePage() {
         <View className='profile-user-main'>
           <View className='profile-name-row'>
             <Text className='profile-name'>{data.name}</Text>
-            <View className='profile-verify-pill'>
-              <Image className='profile-verify-icon' src={iconVerify} mode='aspectFit' />
-              <Text>学生认证</Text>
+            <View className={data.verified ? 'profile-verify-pill' : 'profile-verify-pill denied'}>
+              <Image className='profile-verify-icon' src={data.verified ? iconVerify : iconVerifyDenied} mode='aspectFit' />
+              <Text>{data.verified ? '学生认证' : '未学生认证'}</Text>
             </View>
           </View>
-          <Text className='profile-school-line'>{data.identity}</Text>
+          {data.verified ? <Text className='profile-school-line'>{data.identity}</Text> : null}
         </View>
       </View>
 
@@ -96,7 +99,7 @@ export default function ProfilePage() {
             <Text className='profile-power-title'>宿舍用电</Text>
             <View className='profile-room-line'>
               <Image className='profile-room-icon' src={iconPinWhite} mode='aspectFit' />
-              <Text>桂园6舍 305</Text>
+              <Text>{data.dorm || '桂园6舍 305'}</Text>
             </View>
             <View className='profile-power-value-line'>
               <Text className='profile-power-value'>{data.balance}</Text>

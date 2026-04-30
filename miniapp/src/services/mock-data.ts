@@ -226,6 +226,8 @@ export const profileMockData: ProfileData = {
   identity: '计算机学院 · 2021级',
   studentId: '学号: 2022123456',
   avatar: 'https://image.opxqo.cn/avatar/eg/001.webp',
+  dorm: '桂园6舍 305',
+  verified: true,
   balance: '128.5',
   walletActions: [
     { id: 'wallet-1', title: '充值' },

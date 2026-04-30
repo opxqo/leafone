@@ -104,9 +104,40 @@ export interface ProfileData {
   identity: string
   studentId: string
   avatar?: string
+  dorm?: string
+  verified?: boolean
   balance: string
   walletActions: ProfileAction[]
   settings: string[]
+}
+
+export interface MeProfileUser {
+  id: number | string
+  studentNo?: string | null
+  phone?: string | null
+  dorm?: string | null
+  nickname?: string | null
+  avatarUrl?: string | null
+  gender?: number | null
+  role?: string
+  status?: number
+}
+
+export interface MeStudentProfile {
+  id: number | string
+  userId?: number | string
+  realName?: string | null
+  studentNo?: string | null
+  college?: string | null
+  major?: string | null
+  grade?: string | null
+  identityLabel?: string | null
+  verified?: number | boolean | null
+}
+
+export interface MeProfileResponse {
+  user: MeProfileUser
+  studentProfile?: MeStudentProfile | null
 }
 
 export interface ServiceAdapter {
