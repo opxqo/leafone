@@ -1,4 +1,5 @@
-﻿import { httpAdapter } from './http-adapter'
+import { getAppEnv } from './env'
+import { httpAdapter } from './http-adapter'
 import { mockAdapter } from './mock-adapter'
 import type {
   ArticleData,
@@ -11,7 +12,7 @@ import type {
 } from './types'
 
 function createAdapter(): ServiceAdapter {
-  const mode = process.env.TARO_APP_API_MODE
+  const mode = getAppEnv('TARO_APP_API_MODE')
   if (mode === 'api') {
     return httpAdapter
   }
@@ -43,6 +44,24 @@ export function getMessages(): Promise<MessageItem[]> {
 export function getProfileData(): Promise<ProfileData> {
   return adapter.fetchProfileData()
 }
+
+export {
+  loginWithPassword,
+  loginWithWechat,
+  logoutLocally,
+  registerStudent,
+  verifyStudent,
+} from './auth'
+export { submitFeedback } from './feedback'
+
+export type {
+  AuthResult,
+  PasswordLoginPayload,
+  RegisterPayload,
+  VerifyStudentPayload,
+  WechatLoginPayload,
+} from './auth'
+export type { FeedbackPayload } from './feedback'
 
 export type {
   ArticleData,

@@ -22,6 +22,7 @@ lerna-debug.log*
 
 # Local/editor files
 .DS_Store
+.claude/
 .idea/
 .vscode/*
 !.vscode/extensions.json
@@ -35,3 +36,10 @@ lerna-debug.log*
 # Codex/browser preview artifacts
 .playwright-mcp/
 /messages-*.png
+
+# Local backend/runtime artifacts and private reports
+backend/target/
+backend/logs/
+backend/src/main/resources/application-local.yml
+docs/backend-setup-report.md
+test-web/

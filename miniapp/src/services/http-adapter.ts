@@ -1,31 +1,15 @@
-﻿import type { ServiceAdapter } from './types'
+import { mockAdapter } from './mock-adapter'
+import type { ServiceAdapter } from './types'
 
-function notImplemented(methodName: string): never {
-  throw new Error(`${methodName} is not implemented. Please wire real backend APIs.`)
+function useMockFallback<T extends keyof ServiceAdapter>(methodName: T): ServiceAdapter[T] {
+  return mockAdapter[methodName]
 }
 
 export const httpAdapter: ServiceAdapter = {
-  async fetchHomeData() {
-    return notImplemented('fetchHomeData')
-  },
-
-  async fetchForumData() {
-    return notImplemented('fetchForumData')
-  },
-
-  async fetchArticleData() {
-    return notImplemented('fetchArticleData')
-  },
-
-  async fetchDiscoverCategories() {
-    return notImplemented('fetchDiscoverCategories')
-  },
-
-  async fetchMessages() {
-    return notImplemented('fetchMessages')
-  },
-
-  async fetchProfileData() {
-    return notImplemented('fetchProfileData')
-  },
+  fetchHomeData: useMockFallback('fetchHomeData'),
+  fetchForumData: useMockFallback('fetchForumData'),
+  fetchArticleData: useMockFallback('fetchArticleData'),
+  fetchDiscoverCategories: useMockFallback('fetchDiscoverCategories'),
+  fetchMessages: useMockFallback('fetchMessages'),
+  fetchProfileData: useMockFallback('fetchProfileData'),
 }

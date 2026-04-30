@@ -3,7 +3,6 @@ import { Text, View, Image } from '@tarojs/components'
 import Taro from '@tarojs/taro'
 import type { BottomNavKey } from '../../services/types'
 
-import navBgSvg from './nav-bg.svg'
 import iconHomeSvg from './icon-home.svg'
 import iconForumSvg from './icon-forum.svg'
 import iconMessagesSvg from './icon-messages.svg'
@@ -77,12 +76,6 @@ function BottomNav({ active }: BottomNavProps) {
   return (
     <View className='bottom-nav'>
       <View className='bottom-nav-outer'>
-        <Image
-          className='bottom-nav-bg'
-          src={navBgSvg}
-          mode='aspectFill'
-        />
-
         <View className='bottom-nav-items'>
           {LEFT_NAV_ITEMS.map((item) => {
             const isActive = item.key === activeKey

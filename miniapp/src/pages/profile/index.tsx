@@ -2,7 +2,7 @@ import { Image, Text, View } from '@tarojs/components'
 import Taro from '@tarojs/taro'
 import MobileShell from '../../components/mobile-shell'
 import { useAsyncData } from '../../hooks/use-async-data'
-import { getProfileData, type ProfileData } from '../../services'
+import { getProfileData, logoutLocally, type ProfileData } from '../../services'
 
 import iconLogout from './icon-logout.svg'
 import iconPinWhite from './icon-pin-white.svg'
@@ -28,11 +28,11 @@ const PROFILE_SERVICES = [
   { title: '个人信息', icon: iconSettingUser, tone: 'green' },
   { title: '课程表', icon: iconServiceCalendar, tone: 'blue' },
   { title: '我的收藏', icon: iconServiceBookmark, tone: 'orange' },
-  { title: '问卷调查', icon: iconServiceClipboard, tone: 'purple' },
+  { title: '城院认证', icon: iconServiceClipboard, tone: 'purple', path: '/pages/verification/index' },
   { title: '实习就业', icon: iconServiceBriefcase, tone: 'blue' },
-  { title: '意见反馈', icon: iconSettingMessage, tone: 'orange' },
-  { title: '帮助中心', icon: iconSettingHelp, tone: 'green' },
-  { title: '关于我们', icon: iconSettingInfo, tone: 'purple' },
+  { title: '意见反馈', icon: iconSettingMessage, tone: 'orange', path: '/pages/feedback/index' },
+  { title: '帮助中心', icon: iconSettingHelp, tone: 'green', path: '/pages/help/index' },
+  { title: '关于我们', icon: iconSettingInfo, tone: 'purple', path: '/pages/about/index' },
   { title: '图书借阅', icon: iconServiceBook, tone: 'blue' },
   { title: '更多服务', icon: iconServiceMore, tone: 'gray' },
 ]
@@ -47,8 +47,19 @@ export default function ProfilePage() {
   const data = useAsyncData<ProfileData>(getProfileData, [], null, 'profile')
 
   const handleLogout = () => {
+    logoutLocally()
     Taro.redirectTo({
       url: '/pages/login/index',
+    })
+  }
+
+  const handleServiceClick = (path?: string) => {
+    if (!path) {
+      return
+    }
+
+    Taro.navigateTo({
+      url: path,
     })
   }
 
@@ -144,6 +155,7 @@ export default function ProfilePage() {
               hoverClass='profile-service-item--press'
               hoverStartTime={0}
               hoverStayTime={120}
+              onClick={() => handleServiceClick(item.path)}
             >
               <View className={`profile-service-icon-wrap ${item.tone}`}>
                 <Image className='profile-service-icon' src={item.icon} mode='aspectFit' />

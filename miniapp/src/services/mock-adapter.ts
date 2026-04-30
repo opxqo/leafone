@@ -1,4 +1,4 @@
-﻿import {
+import {
   articleMockData,
   discoverMockData,
   forumMockData,
@@ -6,6 +6,7 @@
   messageMockData,
   profileMockData,
 } from './mock-data'
+import { getAppEnv } from './env'
 import type { ServiceAdapter } from './types'
 
 function wait(duration: number) {
@@ -19,7 +20,7 @@ function wait(duration: number) {
 }
 
 function getDelay() {
-  const raw = Number(process.env.TARO_APP_MOCK_DELAY)
+  const raw = Number(getAppEnv('TARO_APP_MOCK_DELAY'))
   if (Number.isFinite(raw) && raw >= 0) {
     return raw
   }
