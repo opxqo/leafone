@@ -1,4 +1,4 @@
-import { type DependencyList, useEffect, useState } from 'react'
+import { type DependencyList, useCallback, useEffect, useRef, useState } from 'react'
 
 const asyncDataCache = new Map<string, unknown>()
 const asyncDataPromises = new Map<string, Promise<unknown>>()
@@ -30,26 +30,32 @@ function getCacheKey(loader: () => Promise<unknown>, deps: DependencyList, expli
   return `${loaderKey}::${depsKey}`
 }
 
-export function useAsyncData<T>(loader: () => Promise<T>, deps: DependencyList): T | null
-export function useAsyncData<T>(loader: () => Promise<T>, deps: DependencyList, initialData: T): T
+type AsyncDataResult<T, D = T | null> = {
+  data: D
+  error: string | null
+  retry: () => void
+}
+
+export function useAsyncData<T>(loader: () => Promise<T>, deps: DependencyList): AsyncDataResult<T>
+export function useAsyncData<T>(loader: () => Promise<T>, deps: DependencyList, initialData: T): AsyncDataResult<T, T>
 export function useAsyncData<T>(
   loader: () => Promise<T>,
   deps: DependencyList,
   initialData: null,
   cacheKey: string,
-): T | null
+): AsyncDataResult<T>
 export function useAsyncData<T>(
   loader: () => Promise<T>,
   deps: DependencyList,
   initialData: T,
   cacheKey: string,
-): T
+): AsyncDataResult<T, T>
 export function useAsyncData<T>(
   loader: () => Promise<T>,
   deps: DependencyList,
   initialData: T | null = null,
   cacheKey?: string,
-): T | null {
+): AsyncDataResult<T> {
   const resolvedCacheKey = getCacheKey(loader, deps, cacheKey)
   const [data, setData] = useState<T | null>(() => {
     if (asyncDataCache.has(resolvedCacheKey)) {
@@ -57,17 +63,11 @@ export function useAsyncData<T>(
     }
     return initialData
   })
+  const [error, setError] = useState<string | null>(null)
+  const retryCount = useRef(0)
 
-  useEffect(() => {
-    let mounted = true
-    if (asyncDataCache.has(resolvedCacheKey)) {
-      const cachedData = asyncDataCache.get(resolvedCacheKey) as T
-      setData((current) => (Object.is(current, cachedData) ? current : cachedData))
-      return () => {
-        mounted = false
-      }
-    }
-
+  const fetchData = useCallback(() => {
+    setError(null)
     setData((current) => (Object.is(current, initialData) ? current : initialData))
 
     let pendingData = asyncDataPromises.get(resolvedCacheKey) as Promise<T> | undefined
@@ -87,22 +87,36 @@ export function useAsyncData<T>(
 
     pendingData
       .then((nextData) => {
-        if (mounted) {
-          setData((current) => (Object.is(current, nextData) ? current : nextData))
-        }
+        setData((current) => (Object.is(current, nextData) ? current : nextData))
+        setError(null)
       })
-      .catch((error: unknown) => {
-        if (mounted) {
-          console.error(error)
-        }
+      .catch((err: unknown) => {
+        const message = err instanceof Error ? err.message : '加载失败'
+        setError(message)
+        console.error(err)
       })
+  }, [resolvedCacheKey])
 
-    return () => {
-      mounted = false
+  useEffect(() => {
+    if (asyncDataCache.has(resolvedCacheKey)) {
+      const cachedData = asyncDataCache.get(resolvedCacheKey) as T
+      setData((current) => (Object.is(current, cachedData) ? current : cachedData))
+      setError(null)
+      return
     }
+
+    fetchData()
+
     // The caller owns when loader/initialData/cacheKey should change through deps.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, deps)
 
-  return data
+  const retry = useCallback(() => {
+    asyncDataCache.delete(resolvedCacheKey)
+    asyncDataPromises.delete(resolvedCacheKey)
+    retryCount.current += 1
+    fetchData()
+  }, [resolvedCacheKey, fetchData])
+
+  return { data, error, retry }
 }

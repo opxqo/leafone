@@ -8,7 +8,7 @@ import './index.scss'
 const EMPTY_CATEGORIES: DiscoverCategory[] = []
 
 export default function DiscoverPage() {
-  const list = useAsyncData<DiscoverCategory[]>(
+  const { data: list } = useAsyncData<DiscoverCategory[]>(
     getDiscoverCategories,
     [],
     EMPTY_CATEGORIES,

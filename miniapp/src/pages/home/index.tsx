@@ -95,7 +95,7 @@ function getMatchedHeadlines(keyword: string) {
 }
 
 export default function HomePage() {
-  const data = useAsyncData<HomeData>(getHomeData, [], null, 'home')
+  const { data, error, retry } = useAsyncData<HomeData>(getHomeData, [], null, 'home')
   const [searchValue, setSearchValue] = useState('')
   const [searchKeyword, setSearchKeyword] = useState('')
   const visibleHeadlines = useMemo(() => getMatchedHeadlines(searchKeyword), [searchKeyword])
@@ -129,7 +129,18 @@ export default function HomePage() {
   if (!data) {
     return (
       <MobileShell activeNav='home'>
-        <View className='loading-state'>页面加载中...</View>
+        <View className='loading-state'>
+          {error ? (
+            <>
+              <Text>{error}</Text>
+              <View className='retry-btn' onClick={retry}>
+                <Text>点击重试</Text>
+              </View>
+            </>
+          ) : (
+            <Text>页面加载中...</Text>
+          )}
+        </View>
       </MobileShell>
     )
   }

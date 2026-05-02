@@ -48,7 +48,7 @@ const POWER_STATS = [
 
 export default function ProfilePage() {
   const profileCacheKey = `profile:${getAccessToken() || 'guest'}`
-  const data = useAsyncData<ProfileData>(getProfileData, [profileCacheKey], null, profileCacheKey)
+  const { data, error, retry } = useAsyncData<ProfileData>(getProfileData, [profileCacheKey], null, profileCacheKey)
 
   const handleLogout = () => {
     logoutLocally()
@@ -70,7 +70,18 @@ export default function ProfilePage() {
   if (!data) {
     return (
       <MobileShell activeNav='profile' className='profile-shell'>
-        <View className='loading-state'>页面加载中...</View>
+        <View className='loading-state'>
+          {error ? (
+            <>
+              <Text>{error}</Text>
+              <View className='retry-btn' onClick={retry}>
+                <Text>点击重试</Text>
+              </View>
+            </>
+          ) : (
+            <Text>页面加载中...</Text>
+          )}
+        </View>
       </MobileShell>
     )
   }

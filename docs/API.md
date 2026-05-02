@@ -20,6 +20,14 @@
 - [个人中心](#10-个人中心-me)
 - [上传模块](#11-上传模块-uploads)
 - [后台管理](#12-后台管理-admin)
+  - [12.1 帖子管理](#121-帖子管理)
+  - [12.2 用户管理](#122-用户管理)
+  - [12.3 版块管理](#123-版块管理)
+  - [12.4 话题管理](#124-话题管理)
+  - [12.5 头条管理](#125-头条管理)
+  - [12.6 评论管理](#126-评论管理)
+  - [12.7 反馈管理](#127-反馈管理)
+  - [12.8 数据统计](#128-数据统计)
   - [12.9 通知管理](#129-通知管理)
   - [12.10 日志查看](#1210-日志查看)
 
@@ -162,6 +170,8 @@ Authorization: Bearer <accessToken>
 | `description` | string | 描述 |
 | `heatScore` | int | 热度值 |
 | `postCount` | int | 关联帖子数 |
+| `enabled` | int | 是否启用（0=禁用, 1=启用） |
+| `createdAt` | string | 创建时间 |
 
 #### HomeHeadline 头条对象
 
@@ -172,9 +182,12 @@ Authorization: Bearer <accessToken>
 | `summary` | string | 摘要 |
 | `coverUrl` | string | 封面图 URL |
 | `targetType` | string | 目标类型：`POST` / `ACTIVITY` / `URL` |
-| `isPinned` | int | 是否置顶 |
+| `targetId` | long/null | 关联目标 ID |
+| `externalUrl` | string/null | 外部链接 |
+| `isPinned` | int | 是否置顶（0=否, 1=是） |
 | `viewCount` | int | 浏览量 |
 | `publishedAt` | string | 发布时间 |
+| `createdAt` | string | 创建时间 |
 
 #### Message 消息对象
 
@@ -1280,6 +1293,22 @@ PUT /api/v1/admin/posts/{postId}/status
 
 Query 参数：`status`（目标状态：1=正常, 2=隐藏, 3=删除）
 
+#### 切换帖子置顶
+
+```
+PUT /api/v1/admin/posts/{postId}/pin
+```
+
+切换帖子的置顶状态（0↔1），无需请求体。
+
+#### 切换帖子精选
+
+```
+PUT /api/v1/admin/posts/{postId}/feature
+```
+
+切换帖子的精选状态（0↔1），无需请求体。
+
 ### 12.2 用户管理
 
 #### 用户列表
@@ -1336,6 +1365,20 @@ Query 参数：`approved`（`true`=通过, `false`=拒绝）
 
 ### 12.3 版块管理
 
+#### 版块列表
+
+```
+GET /api/v1/admin/modules
+```
+
+Query 参数：
+
+| 参数 | 必填 | 默认值 | 说明 |
+|---|---|---|---|
+| `enabled` | 否 | - | 启用状态筛选（0=禁用, 1=启用） |
+
+响应：`Module` 数组，按 `sortOrder` 升序、`createdAt` 降序排列
+
 #### 创建版块
 
 ```
@@ -1370,6 +1413,20 @@ DELETE /api/v1/admin/modules/{moduleId}
 ```
 
 ### 12.4 话题管理
+
+#### 话题列表
+
+```
+GET /api/v1/admin/topics
+```
+
+Query 参数：
+
+| 参数 | 必填 | 默认值 | 说明 |
+|---|---|---|---|
+| `enabled` | 否 | - | 启用状态筛选（0=禁用, 1=启用） |
+
+响应：`Topic` 数组，按 `heatScore` 降序、`createdAt` 降序排列
 
 #### 创建话题
 
@@ -1469,6 +1526,14 @@ Query 参数：
 DELETE /api/v1/admin/comments/{commentId}
 ```
 
+#### 修改评论状态
+
+```
+PUT /api/v1/admin/comments/{commentId}/status
+```
+
+Query 参数：`status`（目标状态：1=正常, 2=隐藏, 3=删除）
+
 ### 12.7 反馈管理
 
 #### 反馈列表
@@ -1477,7 +1542,13 @@ DELETE /api/v1/admin/comments/{commentId}
 GET /api/v1/admin/feedbacks
 ```
 
-Query 参数：`page`, `pageSize`
+Query 参数：
+
+| 参数 | 必填 | 默认值 | 说明 |
+|---|---|---|---|
+| `status` | 否 | - | 反馈状态筛选（`PENDING`/`RESOLVED`/`REJECTED`） |
+| `page` | 否 | `1` | 页码 |
+| `pageSize` | 否 | `20` | 每页条数 |
 
 #### 修改反馈状态
 

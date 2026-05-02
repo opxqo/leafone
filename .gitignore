@@ -37,9 +37,12 @@ lerna-debug.log*
 .playwright-mcp/
 /messages-*.png
 
+# Environment and secrets
+.env
+**/.env
+
 # Local backend/runtime artifacts and private reports
 backend/target/
 backend/logs/
-backend/src/main/resources/application-local.yml
 docs/backend-setup-report.md
 test-web/

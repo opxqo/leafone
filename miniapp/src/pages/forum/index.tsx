@@ -38,7 +38,7 @@ function matchKeyword(field: string, keyword: string) {
 }
 
 export default function ForumPage() {
-  const data = useAsyncData<ForumData>(getForumData, [], null, 'forum')
+  const { data } = useAsyncData<ForumData>(getForumData, [], null, 'forum')
   const [searchValue, setSearchValue] = useState('')
   const [searchKeyword, setSearchKeyword] = useState('')
 

@@ -1,0 +1,39 @@
+services:
+  mysql:
+    image: mysql:8.4
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-rootpassword}
+      MYSQL_DATABASE: leafone
+      MYSQL_USER: leafone
+      MYSQL_PASSWORD: ${LEAFONE_DB_PASSWORD:-leafone_dev_password}
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./backend/src/main/resources/db/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+
+  redis:
+    image: redis:7
+    ports:
+      - "6379:6379"
+
+  api:
+    build: ./backend
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_PROFILES_ACTIVE: dev
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_NAME: leafone
+      DB_USER: leafone
+      DB_PASSWORD: ${LEAFONE_DB_PASSWORD:-leafone_dev_password}
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      JWT_SECRET: ${JWT_SECRET:-dev-jwt-secret-key-must-be-at-least-256-bits-long}
+    depends_on:
+      - mysql
+      - redis
+
+volumes:
+  mysql_data:

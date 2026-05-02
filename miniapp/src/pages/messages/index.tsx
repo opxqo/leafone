@@ -39,7 +39,7 @@ const MESSAGE_ICON_MAP: Record<string, { icon: string; tone: string }> = {
 const EMPTY_MESSAGES: MessageItem[] = []
 
 export default function MessagesPage() {
-  const messages = useAsyncData<MessageItem[]>(getMessages, [], EMPTY_MESSAGES, 'messages')
+  const { data: messages } = useAsyncData<MessageItem[]>(getMessages, [], EMPTY_MESSAGES, 'messages')
 
   return (
     <MobileShell activeNav='messages' className='message-shell'>

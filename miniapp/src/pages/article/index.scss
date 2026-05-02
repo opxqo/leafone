@@ -5,7 +5,7 @@
 }
 
 .article-shell .mobile-body {
-  padding: 0 0 calc(env(safe-area-inset-bottom) + 124rpx);
+  padding: 0 0 calc(env(safe-area-inset-bottom) + 24rpx);
 }
 
 .article-page {
@@ -30,19 +30,22 @@
   justify-content: center;
 }
 
-.article-back-line {
-  width: 24rpx;
-  height: 24rpx;
-  border-left: 4rpx solid #232a2b;
-  border-bottom: 4rpx solid #232a2b;
-  transform: rotate(45deg);
+.article-nav-icon {
+  width: 40rpx;
+  height: 40rpx;
 }
 
 .article-more-btn {
   background: #f4f5f6;
-  color: #5c6366;
-  font-size: 30rpx;
-  line-height: 1;
+  gap: 6rpx;
+  flex-direction: column;
+}
+
+.article-more-dot {
+  width: 6rpx;
+  height: 6rpx;
+  border-radius: 6rpx;
+  background: #5c6366;
 }
 
 .article-author-section {
@@ -100,7 +103,7 @@
 }
 
 .article-pin-dot,
-.article-location-icon {
+.article-location-icon-text {
   color: #229b59;
   font-size: 18rpx;
 }
@@ -156,12 +159,14 @@
 }
 
 .article-chip-icon {
-  font-size: 20rpx;
+  width: 24rpx;
+  height: 24rpx;
 }
 
 .article-chip-arrow {
-  font-size: 28rpx;
-  line-height: 1;
+  width: 20rpx;
+  height: 20rpx;
+  opacity: 0.6;
 }
 
 .article-content {
@@ -183,6 +188,14 @@
 .article-folder-title {
   margin-top: 20rpx;
   font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+}
+
+.article-folder-icon {
+  width: 28rpx;
+  height: 28rpx;
 }
 
 .article-number-list {
@@ -257,13 +270,16 @@
   width: 52rpx;
   height: 52rpx;
   border-radius: 52rpx;
-  color: #209454;
   background: #e0f2e6;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 30rpx;
-  font-weight: 800;
+  flex: 0 0 auto;
+}
+
+.article-download-icon {
+  width: 28rpx;
+  height: 28rpx;
 }
 
 .article-location-pill {
@@ -278,6 +294,11 @@
   gap: 10rpx;
   font-size: 24rpx;
   font-weight: 700;
+}
+
+.article-location-icon {
+  width: 24rpx;
+  height: 24rpx;
 }
 
 .article-action-row {
@@ -299,8 +320,8 @@
 }
 
 .article-action-icon {
-  color: #596268;
-  font-size: 34rpx;
+  width: 44rpx;
+  height: 44rpx;
 }
 
 .article-comment-panel {
@@ -325,6 +346,18 @@
   color: #60676d;
   font-size: 24rpx;
   font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 4rpx;
+}
+
+.article-sort-chevron {
+  width: 0;
+  height: 0;
+  border-left: 8rpx solid transparent;
+  border-right: 8rpx solid transparent;
+  border-top: 8rpx solid #60676d;
+  margin-top: 2rpx;
 }
 
 .article-comment-item {
@@ -378,36 +411,88 @@
 .article-comment-tools {
   color: #6b7278;
   display: flex;
-  gap: 24rpx;
+  gap: 28rpx;
   font-size: 23rpx;
+}
+
+.article-comment-tool-item {
+  display: flex;
+  align-items: center;
+  gap: 6rpx;
+}
+
+.article-comment-tool-icon {
+  width: 26rpx;
+  height: 26rpx;
 }
 
 .article-comment-dock {
   position: fixed;
-  right: 40rpx;
+  right: 24rpx;
   bottom: calc(env(safe-area-inset-bottom) + 24rpx);
-  left: 40rpx;
+  left: 24rpx;
   z-index: 20;
-  height: 76rpx;
-  padding: 0 22rpx;
-  border-radius: 999rpx;
-  background: #f1f2f3;
+  height: 88rpx;
+  padding: 0 12rpx 0 20rpx;
+  border-radius: 44rpx;
+  background: #fff;
+  box-shadow: 0 4rpx 24rpx rgba(0, 0, 0, 0.1);
   display: flex;
   align-items: center;
-  gap: 22rpx;
+  gap: 12rpx;
   box-sizing: border-box;
+  transform: translateY(160rpx);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+}
+
+.article-comment-dock.is-visible {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.article-dock-input-wrap {
+  flex: 1;
+  min-width: 0;
+  height: 60rpx;
+  padding: 0 16rpx;
+  border-radius: 30rpx;
+  background: #f5f6f7;
+  display: flex;
+  align-items: center;
+  gap: 10rpx;
+}
+
+.article-dock-input-icon {
+  width: 32rpx;
+  height: 32rpx;
+  flex: 0 0 auto;
+  opacity: 0.5;
 }
 
 .article-comment-input {
   flex: 1;
   min-width: 0;
-  height: 76rpx;
-  color: #9aa1a6;
+  height: 60rpx;
+  color: #253a2e;
   font-size: 26rpx;
 }
 
-.article-dock-icon {
-  color: #555c62;
-  font-size: 40rpx;
-  line-height: 1;
+.article-comment-placeholder {
+  color: #a0a8ae;
+}
+
+.article-dock-actions {
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+  flex: 0 0 auto;
+}
+
+.article-dock-action-icon {
+  width: 44rpx;
+  height: 44rpx;
+  opacity: 0.6;
 }
